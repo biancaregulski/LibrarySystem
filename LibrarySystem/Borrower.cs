@@ -3,37 +3,58 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LibrarySystem {
-
+namespace LibrarySystem {	
 	public class Borrower {
-		private int borrowerNum;
-		private String name;
+		
+		private string name;
+		public string Name {
+			get { return name; }
+			set { name = value; }
+		}
+		
 		private DateTime dob;
-		private HashSet<Book> checkedOutBooks = new HashSet<Book>();
-		private Boolean isAllowed;
+		public DateTime Dob {
+			get { return dob; }
+			set { dob = value; }
+		}
+		
+		// TODO: come up with calculation for those not allowed
+		private Boolean restriction;
+		public Boolean Restriction {
+			get { return restriction; }
+			set { restriction = value; }
+		}
+		
+		private List<Book> checkedOutBooks = new List<Book>();
+		public List<Book> CheckedOutBooks {
+			get { return checkedOutBooks; }
+			set { checkedOutBooks = value; }
+		}
+			
 		private int numReturnedLate;
 		
-		public Borrower(String name_, DateTime dob_) {
-			//this.borrowerNum = newBorrowerNum(); 			// TODO: make funciton elsewhere
-			name = name_;
-			dob = dob_;
-			isAllowed = true;
+		public Borrower(string name, DateTime dob) {
+			this.name = name;
+			this.dob = dob;
+			this.restriction = false;
 		}
 		
-		// TODO: come up with calculation for those not allowed		
-		public Boolean getIsAllowed(){
-			return this.isAllowed;
-		}
-		
-		public void addToCheckedOutBooks(Book book) {
-			checkedOutBooks.Add(book);
-		}
-		
-		public void removeFromCheckedOutBooks(Book book, Boolean isOnTime) {
-			checkedOutBooks.Remove(book);
-			if (!isOnTime) {
-				numReturnedLate++;
+		public Boolean addToCheckedOutBooks(Book book) {
+			if (checkedOutBooks.Count < 5) {
+				checkedOutBooks.Add(book);
+				return true;
 			}
+			return false;			// too many books checked out (max 5) 
+		}
+		
+		public Boolean removeFromCheckedOutBooks(Book book, Boolean isOnTime) {
+			if (checkedOutBooks.Remove(book)) {
+				if (!isOnTime) {
+					numReturnedLate++;
+				}
+				return true;
+			}
+			return false;
 		}
 	}
 }
