@@ -52,6 +52,14 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="Borrower.cs" />
+    <Compile Include="AddBorrowerForm.cs" />
+    <Compile Include="AddBorrowerForm.Designer.cs">
+      <DependentUpon>AddBorrowerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddBookForm.cs" />
+    <Compile Include="AddBookForm.Designer.cs">
+      <DependentUpon>AddBookForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +73,12 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddBorrowerForm.resx">
+      <DependentUpon>AddBorrowerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddBookForm.resx">
+      <DependentUpon>AddBookForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

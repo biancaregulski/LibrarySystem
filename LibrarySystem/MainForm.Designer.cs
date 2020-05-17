@@ -36,6 +36,11 @@
 		private System.Windows.Forms.Button buttonCheckout;
 		private System.Windows.Forms.TextBox textBoxWeeks;
 		private System.Windows.Forms.Label labelNameValue;
+		private System.Windows.Forms.Button buttonExit;
+		private System.Windows.Forms.Button buttonAddBorrower;
+		private System.Windows.Forms.Button buttonDeleteBorrower;
+		private System.Windows.Forms.Button buttonAddBook;
+		private System.Windows.Forms.Button buttonDeleteBook;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -52,10 +57,6 @@
 		}
 		
 		/// <summary>
-		/// This method is required for Windows Forms designer support.
-		/// Do not change the method contents inside the source code editor. The Forms designer might
-		/// not be able to load this method if it was changed manually.
-		/// </summary>
 		private void InitializeComponent()
 		{
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -88,6 +89,11 @@
 			this.buttonReturn = new System.Windows.Forms.Button();
 			this.textBoxReturnId = new System.Windows.Forms.TextBox();
 			this.labelReturnId = new System.Windows.Forms.Label();
+			this.buttonExit = new System.Windows.Forms.Button();
+			this.buttonAddBorrower = new System.Windows.Forms.Button();
+			this.buttonDeleteBorrower = new System.Windows.Forms.Button();
+			this.buttonAddBook = new System.Windows.Forms.Button();
+			this.buttonDeleteBook = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -358,18 +364,75 @@
 			this.labelReturnId.TabIndex = 0;
 			this.labelReturnId.Text = "Book ID:";
 			// 
+			// buttonExit
+			// 
+			this.buttonExit.Location = new System.Drawing.Point(19, 368);
+			this.buttonExit.Name = "buttonExit";
+			this.buttonExit.Size = new System.Drawing.Size(75, 23);
+			this.buttonExit.TabIndex = 4;
+			this.buttonExit.Text = "Exit";
+			this.buttonExit.UseVisualStyleBackColor = true;
+			// 
+			// buttonAddBorrower
+			// 
+			this.buttonAddBorrower.Location = new System.Drawing.Point(164, 368);
+			this.buttonAddBorrower.Name = "buttonAddBorrower";
+			this.buttonAddBorrower.Size = new System.Drawing.Size(103, 23);
+			this.buttonAddBorrower.TabIndex = 5;
+			this.buttonAddBorrower.Text = "Add Borrower";
+			this.buttonAddBorrower.UseVisualStyleBackColor = true;
+			this.buttonAddBorrower.Click += new System.EventHandler(this.ButtonAddBorrowerClick);
+			// 
+			// buttonDeleteBorrower
+			// 
+			this.buttonDeleteBorrower.Location = new System.Drawing.Point(322, 368);
+			this.buttonDeleteBorrower.Name = "buttonDeleteBorrower";
+			this.buttonDeleteBorrower.Size = new System.Drawing.Size(120, 23);
+			this.buttonDeleteBorrower.TabIndex = 6;
+			this.buttonDeleteBorrower.Text = "Delete Borrower";
+			this.buttonDeleteBorrower.UseVisualStyleBackColor = true;
+			this.buttonDeleteBorrower.Click += new System.EventHandler(this.ButtonDeleteBorrowerClick);
+			// 
+			// buttonAddBook
+			// 
+			this.buttonAddBook.Location = new System.Drawing.Point(491, 368);
+			this.buttonAddBook.Name = "buttonAddBook";
+			this.buttonAddBook.Size = new System.Drawing.Size(80, 23);
+			this.buttonAddBook.TabIndex = 7;
+			this.buttonAddBook.Text = "Add Book";
+			this.buttonAddBook.UseVisualStyleBackColor = true;
+			this.buttonAddBook.Click += new System.EventHandler(this.ButtonAddBookClick);
+			// 
+			// buttonDeleteBook
+			// 
+			this.buttonDeleteBook.Location = new System.Drawing.Point(623, 368);
+			this.buttonDeleteBook.Name = "buttonDeleteBook";
+			this.buttonDeleteBook.Size = new System.Drawing.Size(103, 23);
+			this.buttonDeleteBook.TabIndex = 8;
+			this.buttonDeleteBook.Text = "Delete Book";
+			this.buttonDeleteBook.UseVisualStyleBackColor = true;
+			this.buttonDeleteBook.Click += new System.EventHandler(this.ButtonDeleteBookClick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(738, 359);
+			this.ClientSize = new System.Drawing.Size(738, 403);
+			this.Controls.Add(this.buttonDeleteBook);
+			this.Controls.Add(this.buttonAddBook);
+			this.Controls.Add(this.buttonDeleteBorrower);
+			this.Controls.Add(this.buttonAddBorrower);
+			this.Controls.Add(this.buttonExit);
 			this.Controls.Add(this.booksListView);
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
 			this.Name = "MainForm";
-			this.Text = "Borrower";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "Borrower Information";
 			this.Load += new System.EventHandler(this.MainFormLoad);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

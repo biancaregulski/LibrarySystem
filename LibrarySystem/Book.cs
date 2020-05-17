@@ -12,10 +12,16 @@ namespace LibrarySystem {
 			set { title = value; }
 		}
 		
-		private string author;
-		public string Author {
-			get { return author; }
-			set { author = value; }
+		private string authorFirstName;
+		public string AuthorFirstName {
+			get { return authorFirstName; }
+			set { authorFirstName = value; }
+		}
+		
+		private string authorLastName;
+		public string AuthorLastName {
+			get { return authorLastName; }
+			set { authorLastName = value; }
 		}
 		
 		private int year;
@@ -36,6 +42,12 @@ namespace LibrarySystem {
 			set { avaliable = value; }
 		}
 		
+		private Boolean fiction;
+		public Boolean Fiction {
+			get {return fiction; }
+			set {fiction = value; }
+		}
+		
 		private DateTime? checkoutDate;
 		public DateTime? CheckoutDate {
 			get { return checkoutDate; }
@@ -48,12 +60,14 @@ namespace LibrarySystem {
 			set { returnDate = value; }
 		}
 		
-		public Book(String title, String author, int year, String location) {
+		public Book(String title, String authorFirstName, string authorLastName, int year, Boolean fiction, string location) {
 			this.title = title;
-			this.author = author;
+			this.authorFirstName = authorFirstName;
+			this.authorLastName = authorLastName;
 			this.year = year;
-			this.location = location;
+			this.fiction = fiction;
 			this.avaliable = true;
+			this.location = location;
 		}
 		
 		// fails if book is already checkout out or borrower is now allowed to check out
