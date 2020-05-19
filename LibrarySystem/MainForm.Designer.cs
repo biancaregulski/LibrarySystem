@@ -27,20 +27,21 @@
 		private System.Windows.Forms.Label labelCheckoutNotification;
 		private System.Windows.Forms.Label labelReturnNotification;
 		private System.Windows.Forms.ColumnHeader yearColumnHeader;
-		private System.Windows.Forms.Label labelDobValue;
-		private System.Windows.Forms.Label labelRestrictionValue;
-		private System.Windows.Forms.Label labelRestriction;
 		private System.Windows.Forms.Label labelDob;
 		private System.Windows.Forms.Label labelName;
 		private System.Windows.Forms.Label labelReturnId;
 		private System.Windows.Forms.Button buttonCheckout;
 		private System.Windows.Forms.TextBox textBoxWeeks;
-		private System.Windows.Forms.Label labelNameValue;
-		private System.Windows.Forms.Button buttonExit;
 		private System.Windows.Forms.Button buttonAddBorrower;
-		private System.Windows.Forms.Button buttonDeleteBorrower;
-		private System.Windows.Forms.Button buttonAddBook;
 		private System.Windows.Forms.Button buttonDeleteBook;
+		private System.Windows.Forms.Button buttonSearch;
+		private System.Windows.Forms.Button buttonRemove;
+		private System.Windows.Forms.Button buttonEdit;
+		private System.Windows.Forms.TextBox textBoxName;
+		private System.Windows.Forms.TextBox textBoxDob;
+		private System.Windows.Forms.DateTimePicker dateTimePicker;
+		private System.Windows.Forms.Label labelInfoNotification;
+		private System.Windows.Forms.Button buttonAddBook;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -60,15 +61,18 @@
 		private void InitializeComponent()
 		{
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.buttonSearch = new System.Windows.Forms.Button();
 			this.labelShowNotification = new System.Windows.Forms.Label();
 			this.buttonShowBorrower = new System.Windows.Forms.Button();
 			this.textBoxBorrowerId = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.labelNameValue = new System.Windows.Forms.Label();
-			this.labelRestrictionValue = new System.Windows.Forms.Label();
-			this.labelRestriction = new System.Windows.Forms.Label();
-			this.labelDobValue = new System.Windows.Forms.Label();
+			this.labelInfoNotification = new System.Windows.Forms.Label();
+			this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+			this.textBoxDob = new System.Windows.Forms.TextBox();
+			this.textBoxName = new System.Windows.Forms.TextBox();
+			this.buttonRemove = new System.Windows.Forms.Button();
+			this.buttonEdit = new System.Windows.Forms.Button();
 			this.labelDob = new System.Windows.Forms.Label();
 			this.labelName = new System.Windows.Forms.Label();
 			this.booksListView = new System.Windows.Forms.ListView();
@@ -89,11 +93,9 @@
 			this.buttonReturn = new System.Windows.Forms.Button();
 			this.textBoxReturnId = new System.Windows.Forms.TextBox();
 			this.labelReturnId = new System.Windows.Forms.Label();
-			this.buttonExit = new System.Windows.Forms.Button();
 			this.buttonAddBorrower = new System.Windows.Forms.Button();
-			this.buttonDeleteBorrower = new System.Windows.Forms.Button();
-			this.buttonAddBook = new System.Windows.Forms.Button();
 			this.buttonDeleteBook = new System.Windows.Forms.Button();
+			this.buttonAddBook = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -102,28 +104,38 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.buttonSearch);
 			this.groupBox1.Controls.Add(this.labelShowNotification);
 			this.groupBox1.Controls.Add(this.buttonShowBorrower);
 			this.groupBox1.Controls.Add(this.textBoxBorrowerId);
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(356, 87);
+			this.groupBox1.Size = new System.Drawing.Size(371, 87);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Show Borrower:";
 			// 
+			// buttonSearch
+			// 
+			this.buttonSearch.Location = new System.Drawing.Point(207, 51);
+			this.buttonSearch.Name = "buttonSearch";
+			this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+			this.buttonSearch.TabIndex = 4;
+			this.buttonSearch.Text = "Search";
+			this.buttonSearch.UseVisualStyleBackColor = true;
+			// 
 			// labelShowNotification
 			// 
 			this.labelShowNotification.ForeColor = System.Drawing.SystemColors.HotTrack;
-			this.labelShowNotification.Location = new System.Drawing.Point(6, 54);
+			this.labelShowNotification.Location = new System.Drawing.Point(7, 54);
 			this.labelShowNotification.Name = "labelShowNotification";
-			this.labelShowNotification.Size = new System.Drawing.Size(249, 23);
+			this.labelShowNotification.Size = new System.Drawing.Size(194, 23);
 			this.labelShowNotification.TabIndex = 3;
 			// 
 			// buttonShowBorrower
 			// 
-			this.buttonShowBorrower.Location = new System.Drawing.Point(261, 51);
+			this.buttonShowBorrower.Location = new System.Drawing.Point(288, 52);
 			this.buttonShowBorrower.Name = "buttonShowBorrower";
 			this.buttonShowBorrower.Size = new System.Drawing.Size(75, 23);
 			this.buttonShowBorrower.TabIndex = 2;
@@ -133,66 +145,94 @@
 			// 
 			// textBoxBorrowerId
 			// 
-			this.textBoxBorrowerId.Location = new System.Drawing.Point(159, 23);
+			this.textBoxBorrowerId.Location = new System.Drawing.Point(177, 23);
 			this.textBoxBorrowerId.Name = "textBoxBorrowerId";
-			this.textBoxBorrowerId.Size = new System.Drawing.Size(178, 22);
+			this.textBoxBorrowerId.Size = new System.Drawing.Size(186, 22);
 			this.textBoxBorrowerId.TabIndex = 1;
 			// 
 			// label1
 			// 
 			this.label1.Location = new System.Drawing.Point(6, 26);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(100, 23);
+			this.label1.Size = new System.Drawing.Size(129, 23);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Borrower ID:";
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.labelNameValue);
-			this.groupBox2.Controls.Add(this.labelRestrictionValue);
-			this.groupBox2.Controls.Add(this.labelRestriction);
-			this.groupBox2.Controls.Add(this.labelDobValue);
+			this.groupBox2.Controls.Add(this.labelInfoNotification);
+			this.groupBox2.Controls.Add(this.dateTimePicker);
+			this.groupBox2.Controls.Add(this.textBoxDob);
+			this.groupBox2.Controls.Add(this.textBoxName);
+			this.groupBox2.Controls.Add(this.buttonRemove);
+			this.groupBox2.Controls.Add(this.buttonEdit);
 			this.groupBox2.Controls.Add(this.labelDob);
 			this.groupBox2.Controls.Add(this.labelName);
 			this.groupBox2.Location = new System.Drawing.Point(12, 105);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(356, 106);
+			this.groupBox2.Size = new System.Drawing.Size(371, 118);
 			this.groupBox2.TabIndex = 1;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Borrower Information:";
 			// 
-			// labelNameValue
+			// labelInfoNotification
 			// 
-			this.labelNameValue.Location = new System.Drawing.Point(159, 25);
-			this.labelNameValue.Name = "labelNameValue";
-			this.labelNameValue.Size = new System.Drawing.Size(178, 23);
-			this.labelNameValue.TabIndex = 6;
+			this.labelInfoNotification.ForeColor = System.Drawing.SystemColors.HotTrack;
+			this.labelInfoNotification.Location = new System.Drawing.Point(7, 80);
+			this.labelInfoNotification.Name = "labelInfoNotification";
+			this.labelInfoNotification.Size = new System.Drawing.Size(194, 23);
+			this.labelInfoNotification.TabIndex = 12;
 			// 
-			// labelRestrictionValue
+			// dateTimePicker
 			// 
-			this.labelRestrictionValue.Location = new System.Drawing.Point(159, 72);
-			this.labelRestrictionValue.Name = "labelRestrictionValue";
-			this.labelRestrictionValue.Size = new System.Drawing.Size(178, 23);
-			this.labelRestrictionValue.TabIndex = 5;
+			this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dateTimePicker.Location = new System.Drawing.Point(209, 52);
+			this.dateTimePicker.Name = "dateTimePicker";
+			this.dateTimePicker.Size = new System.Drawing.Size(156, 22);
+			this.dateTimePicker.TabIndex = 9;
+			this.dateTimePicker.Visible = false;
 			// 
-			// labelRestriction
+			// textBoxDob
 			// 
-			this.labelRestriction.Location = new System.Drawing.Point(7, 72);
-			this.labelRestriction.Name = "labelRestriction";
-			this.labelRestriction.Size = new System.Drawing.Size(100, 21);
-			this.labelRestriction.TabIndex = 4;
-			this.labelRestriction.Text = "Restriction:";
+			this.textBoxDob.Location = new System.Drawing.Point(209, 52);
+			this.textBoxDob.Name = "textBoxDob";
+			this.textBoxDob.ReadOnly = true;
+			this.textBoxDob.Size = new System.Drawing.Size(156, 22);
+			this.textBoxDob.TabIndex = 11;
 			// 
-			// labelDobValue
+			// textBoxName
 			// 
-			this.labelDobValue.Location = new System.Drawing.Point(158, 49);
-			this.labelDobValue.Name = "labelDobValue";
-			this.labelDobValue.Size = new System.Drawing.Size(178, 23);
-			this.labelDobValue.TabIndex = 3;
+			this.textBoxName.Location = new System.Drawing.Point(209, 23);
+			this.textBoxName.Name = "textBoxName";
+			this.textBoxName.ReadOnly = true;
+			this.textBoxName.Size = new System.Drawing.Size(154, 22);
+			this.textBoxName.TabIndex = 10;
+			// 
+			// buttonRemove
+			// 
+			this.buttonRemove.Enabled = false;
+			this.buttonRemove.Location = new System.Drawing.Point(209, 80);
+			this.buttonRemove.Name = "buttonRemove";
+			this.buttonRemove.Size = new System.Drawing.Size(75, 23);
+			this.buttonRemove.TabIndex = 9;
+			this.buttonRemove.Text = "Remove";
+			this.buttonRemove.UseVisualStyleBackColor = true;
+			this.buttonRemove.Click += new System.EventHandler(this.ButtonRemoveClick);
+			// 
+			// buttonEdit
+			// 
+			this.buttonEdit.Enabled = false;
+			this.buttonEdit.Location = new System.Drawing.Point(290, 80);
+			this.buttonEdit.Name = "buttonEdit";
+			this.buttonEdit.Size = new System.Drawing.Size(75, 23);
+			this.buttonEdit.TabIndex = 7;
+			this.buttonEdit.Text = "Edit";
+			this.buttonEdit.UseVisualStyleBackColor = true;
+			this.buttonEdit.Click += new System.EventHandler(this.ButtonNameEditClick);
 			// 
 			// labelDob
 			// 
-			this.labelDob.Location = new System.Drawing.Point(7, 49);
+			this.labelDob.Location = new System.Drawing.Point(7, 52);
 			this.labelDob.Name = "labelDob";
 			this.labelDob.Size = new System.Drawing.Size(100, 23);
 			this.labelDob.TabIndex = 1;
@@ -200,7 +240,7 @@
 			// 
 			// labelName
 			// 
-			this.labelName.Location = new System.Drawing.Point(7, 26);
+			this.labelName.Location = new System.Drawing.Point(6, 26);
 			this.labelName.Name = "labelName";
 			this.labelName.Size = new System.Drawing.Size(100, 23);
 			this.labelName.TabIndex = 0;
@@ -217,9 +257,9 @@
 			this.booksListView.FullRowSelect = true;
 			this.booksListView.GridLines = true;
 			this.booksListView.HideSelection = false;
-			this.booksListView.Location = new System.Drawing.Point(12, 221);
+			this.booksListView.Location = new System.Drawing.Point(12, 229);
 			this.booksListView.Name = "booksListView";
-			this.booksListView.Size = new System.Drawing.Size(714, 128);
+			this.booksListView.Size = new System.Drawing.Size(668, 128);
 			this.booksListView.TabIndex = 2;
 			this.booksListView.UseCompatibleStateImageBehavior = false;
 			this.booksListView.View = System.Windows.Forms.View.Details;
@@ -227,7 +267,7 @@
 			// titleColumnHeader
 			// 
 			this.titleColumnHeader.Text = "Title";
-			this.titleColumnHeader.Width = 210;
+			this.titleColumnHeader.Width = 164;
 			// 
 			// authorColumnHeader
 			// 
@@ -258,9 +298,9 @@
 			this.groupBox3.Controls.Add(this.textBoxCheckoutId);
 			this.groupBox3.Controls.Add(this.labelCheckoutId);
 			this.groupBox3.ForeColor = System.Drawing.Color.Black;
-			this.groupBox3.Location = new System.Drawing.Point(374, 12);
+			this.groupBox3.Location = new System.Drawing.Point(389, 12);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(352, 113);
+			this.groupBox3.Size = new System.Drawing.Size(291, 120);
 			this.groupBox3.TabIndex = 2;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Checkout:";
@@ -268,31 +308,31 @@
 			// labelCheckoutNotification
 			// 
 			this.labelCheckoutNotification.ForeColor = System.Drawing.SystemColors.HotTrack;
-			this.labelCheckoutNotification.Location = new System.Drawing.Point(7, 82);
+			this.labelCheckoutNotification.Location = new System.Drawing.Point(6, 82);
 			this.labelCheckoutNotification.Name = "labelCheckoutNotification";
-			this.labelCheckoutNotification.Size = new System.Drawing.Size(258, 23);
+			this.labelCheckoutNotification.Size = new System.Drawing.Size(199, 23);
 			this.labelCheckoutNotification.TabIndex = 5;
 			// 
 			// labelWeeks
 			// 
-			this.labelWeeks.Location = new System.Drawing.Point(8, 54);
+			this.labelWeeks.Location = new System.Drawing.Point(6, 55);
 			this.labelWeeks.Name = "labelWeeks";
-			this.labelWeeks.Size = new System.Drawing.Size(147, 23);
+			this.labelWeeks.Size = new System.Drawing.Size(128, 23);
 			this.labelWeeks.TabIndex = 4;
 			this.labelWeeks.Text = "No. weeks:";
 			// 
 			// textBoxWeeks
 			// 
 			this.textBoxWeeks.Enabled = false;
-			this.textBoxWeeks.Location = new System.Drawing.Point(160, 51);
+			this.textBoxWeeks.Location = new System.Drawing.Point(142, 52);
 			this.textBoxWeeks.Name = "textBoxWeeks";
-			this.textBoxWeeks.Size = new System.Drawing.Size(186, 22);
+			this.textBoxWeeks.Size = new System.Drawing.Size(139, 22);
 			this.textBoxWeeks.TabIndex = 3;
 			// 
 			// buttonCheckout
 			// 
 			this.buttonCheckout.Enabled = false;
-			this.buttonCheckout.Location = new System.Drawing.Point(271, 79);
+			this.buttonCheckout.Location = new System.Drawing.Point(206, 82);
 			this.buttonCheckout.Name = "buttonCheckout";
 			this.buttonCheckout.Size = new System.Drawing.Size(75, 23);
 			this.buttonCheckout.TabIndex = 2;
@@ -303,16 +343,16 @@
 			// textBoxCheckoutId
 			// 
 			this.textBoxCheckoutId.Enabled = false;
-			this.textBoxCheckoutId.Location = new System.Drawing.Point(160, 23);
+			this.textBoxCheckoutId.Location = new System.Drawing.Point(142, 23);
 			this.textBoxCheckoutId.Name = "textBoxCheckoutId";
-			this.textBoxCheckoutId.Size = new System.Drawing.Size(186, 22);
+			this.textBoxCheckoutId.Size = new System.Drawing.Size(139, 22);
 			this.textBoxCheckoutId.TabIndex = 1;
 			// 
 			// labelCheckoutId
 			// 
 			this.labelCheckoutId.Location = new System.Drawing.Point(7, 26);
 			this.labelCheckoutId.Name = "labelCheckoutId";
-			this.labelCheckoutId.Size = new System.Drawing.Size(148, 23);
+			this.labelCheckoutId.Size = new System.Drawing.Size(129, 23);
 			this.labelCheckoutId.TabIndex = 0;
 			this.labelCheckoutId.Text = "Book ID:";
 			// 
@@ -322,9 +362,9 @@
 			this.groupBox4.Controls.Add(this.buttonReturn);
 			this.groupBox4.Controls.Add(this.textBoxReturnId);
 			this.groupBox4.Controls.Add(this.labelReturnId);
-			this.groupBox4.Location = new System.Drawing.Point(374, 131);
+			this.groupBox4.Location = new System.Drawing.Point(389, 131);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(352, 80);
+			this.groupBox4.Size = new System.Drawing.Size(291, 92);
 			this.groupBox4.TabIndex = 3;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Return:";
@@ -332,15 +372,15 @@
 			// labelReturnNotification
 			// 
 			this.labelReturnNotification.ForeColor = System.Drawing.SystemColors.HotTrack;
-			this.labelReturnNotification.Location = new System.Drawing.Point(6, 51);
+			this.labelReturnNotification.Location = new System.Drawing.Point(6, 54);
 			this.labelReturnNotification.Name = "labelReturnNotification";
-			this.labelReturnNotification.Size = new System.Drawing.Size(259, 23);
+			this.labelReturnNotification.Size = new System.Drawing.Size(188, 23);
 			this.labelReturnNotification.TabIndex = 3;
 			// 
 			// buttonReturn
 			// 
 			this.buttonReturn.Enabled = false;
-			this.buttonReturn.Location = new System.Drawing.Point(271, 51);
+			this.buttonReturn.Location = new System.Drawing.Point(206, 54);
 			this.buttonReturn.Name = "buttonReturn";
 			this.buttonReturn.Size = new System.Drawing.Size(75, 23);
 			this.buttonReturn.TabIndex = 2;
@@ -351,31 +391,22 @@
 			// textBoxReturnId
 			// 
 			this.textBoxReturnId.Enabled = false;
-			this.textBoxReturnId.Location = new System.Drawing.Point(161, 22);
+			this.textBoxReturnId.Location = new System.Drawing.Point(140, 23);
 			this.textBoxReturnId.Name = "textBoxReturnId";
-			this.textBoxReturnId.Size = new System.Drawing.Size(185, 22);
+			this.textBoxReturnId.Size = new System.Drawing.Size(139, 22);
 			this.textBoxReturnId.TabIndex = 1;
 			// 
 			// labelReturnId
 			// 
-			this.labelReturnId.Location = new System.Drawing.Point(8, 25);
+			this.labelReturnId.Location = new System.Drawing.Point(6, 26);
 			this.labelReturnId.Name = "labelReturnId";
-			this.labelReturnId.Size = new System.Drawing.Size(147, 23);
+			this.labelReturnId.Size = new System.Drawing.Size(128, 23);
 			this.labelReturnId.TabIndex = 0;
 			this.labelReturnId.Text = "Book ID:";
 			// 
-			// buttonExit
-			// 
-			this.buttonExit.Location = new System.Drawing.Point(19, 368);
-			this.buttonExit.Name = "buttonExit";
-			this.buttonExit.Size = new System.Drawing.Size(75, 23);
-			this.buttonExit.TabIndex = 4;
-			this.buttonExit.Text = "Exit";
-			this.buttonExit.UseVisualStyleBackColor = true;
-			// 
 			// buttonAddBorrower
 			// 
-			this.buttonAddBorrower.Location = new System.Drawing.Point(164, 368);
+			this.buttonAddBorrower.Location = new System.Drawing.Point(12, 363);
 			this.buttonAddBorrower.Name = "buttonAddBorrower";
 			this.buttonAddBorrower.Size = new System.Drawing.Size(103, 23);
 			this.buttonAddBorrower.TabIndex = 5;
@@ -383,46 +414,33 @@
 			this.buttonAddBorrower.UseVisualStyleBackColor = true;
 			this.buttonAddBorrower.Click += new System.EventHandler(this.ButtonAddBorrowerClick);
 			// 
-			// buttonDeleteBorrower
+			// buttonDeleteBook
 			// 
-			this.buttonDeleteBorrower.Location = new System.Drawing.Point(322, 368);
-			this.buttonDeleteBorrower.Name = "buttonDeleteBorrower";
-			this.buttonDeleteBorrower.Size = new System.Drawing.Size(120, 23);
-			this.buttonDeleteBorrower.TabIndex = 6;
-			this.buttonDeleteBorrower.Text = "Delete Borrower";
-			this.buttonDeleteBorrower.UseVisualStyleBackColor = true;
-			this.buttonDeleteBorrower.Click += new System.EventHandler(this.ButtonDeleteBorrowerClick);
+			this.buttonDeleteBook.Location = new System.Drawing.Point(569, 363);
+			this.buttonDeleteBook.Name = "buttonDeleteBook";
+			this.buttonDeleteBook.Size = new System.Drawing.Size(111, 23);
+			this.buttonDeleteBook.TabIndex = 8;
+			this.buttonDeleteBook.Text = "View/Edit Book";
+			this.buttonDeleteBook.UseVisualStyleBackColor = true;
 			// 
 			// buttonAddBook
 			// 
-			this.buttonAddBook.Location = new System.Drawing.Point(491, 368);
+			this.buttonAddBook.Location = new System.Drawing.Point(329, 363);
 			this.buttonAddBook.Name = "buttonAddBook";
-			this.buttonAddBook.Size = new System.Drawing.Size(80, 23);
-			this.buttonAddBook.TabIndex = 7;
+			this.buttonAddBook.Size = new System.Drawing.Size(82, 23);
+			this.buttonAddBook.TabIndex = 9;
 			this.buttonAddBook.Text = "Add Book";
 			this.buttonAddBook.UseVisualStyleBackColor = true;
 			this.buttonAddBook.Click += new System.EventHandler(this.ButtonAddBookClick);
-			// 
-			// buttonDeleteBook
-			// 
-			this.buttonDeleteBook.Location = new System.Drawing.Point(623, 368);
-			this.buttonDeleteBook.Name = "buttonDeleteBook";
-			this.buttonDeleteBook.Size = new System.Drawing.Size(103, 23);
-			this.buttonDeleteBook.TabIndex = 8;
-			this.buttonDeleteBook.Text = "Delete Book";
-			this.buttonDeleteBook.UseVisualStyleBackColor = true;
-			this.buttonDeleteBook.Click += new System.EventHandler(this.ButtonDeleteBookClick);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(738, 403);
-			this.Controls.Add(this.buttonDeleteBook);
+			this.ClientSize = new System.Drawing.Size(688, 396);
 			this.Controls.Add(this.buttonAddBook);
-			this.Controls.Add(this.buttonDeleteBorrower);
+			this.Controls.Add(this.buttonDeleteBook);
 			this.Controls.Add(this.buttonAddBorrower);
-			this.Controls.Add(this.buttonExit);
 			this.Controls.Add(this.booksListView);
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.groupBox3);
@@ -437,6 +455,7 @@
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
@@ -444,5 +463,6 @@
 			this.ResumeLayout(false);
 
 		}
+
 	}
 }

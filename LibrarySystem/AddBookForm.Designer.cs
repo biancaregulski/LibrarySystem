@@ -1,12 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Bianca
- * Date: 5/16/2020
- * Time: 9:51 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-namespace LibrarySystem
+﻿namespace LibrarySystem
 {
 	partial class AddBookForm
 	{
