@@ -5,12 +5,13 @@ using System.Windows.Forms;
 
 // TODO: add search book and search borrower features
 // TODO: hover over text to show full
+// TODO: make return and checkout longer to show notifs
 
 namespace LibrarySystem {
 
 	public partial class MainForm : Form {
-		Hashtable borrowers =  new Hashtable();
-		Hashtable books = new Hashtable();
+		public Hashtable borrowers { get; set; }
+		public Hashtable books { get; set; }
 		
 		Borrower currentBorrower;
 		int? currentBorrowerId;
@@ -20,14 +21,20 @@ namespace LibrarySystem {
 		
 		AddBorrowerForm addBorrowerForm = new AddBorrowerForm ();
 		AddBookForm addBookForm = new AddBookForm ();
-		
+		ViewBookForm viewBookForm = new ViewBookForm ();
 		
 		public MainForm() {
 			InitializeComponent();
+			borrowers =  new Hashtable();
+			books = new Hashtable();
+			borrowers.Add(++borrowIdCount, new Borrower("Lucy Smith", new DateTime(1995, 1, 18)));
+			borrowers.Add(++borrowIdCount, new Borrower("Jack Jacobs", new DateTime(1997, 2, 16)));
+			books.Add(++bookIdCount, new Book("1984", "George", "Orwell", 1949, true, "842.611.854.C"));
+			books.Add(++bookIdCount, new Book("Brave New World", "Aldous", "Huxley", 1932, true, "842.150.656.F"));
 		}
 		
 		void MainFormLoad(object sender, EventArgs e) {
-
+			
 		}
 		
 		public int addBorrower(string name, DateTime dt) {
@@ -38,6 +45,19 @@ namespace LibrarySystem {
 		public int addBook(string title, string authorFirstName, string authorLastName, int year, Boolean genre, string location) {
 			books.Add(++bookIdCount, new Book(title, authorFirstName, authorLastName, year, genre, location));
 			return bookIdCount;
+		}
+		
+		public string calculateBookLocation(string title, string authorLastName, int year, Boolean fiction) {
+			string location = (fiction == true) ? "F." : "N.";		// start with number to represent genre
+			for (int i = 0; i < 3; i++) {
+				// give number for nth number of alphabet for first 3 letters of name
+				location +=  (i < authorLastName.Length && Char.IsLetter(authorLastName[i])) ?
+					((int)Char.ToLower(authorLastName[i]) - 96).ToString() : "0";
+				location += ".";
+			}
+			location += Char.ToUpper(title[0]) + ".";
+			location+= year.ToString();
+			return location;
 		}
 		
 		void ButtonShowBorrowerClick(object sender, EventArgs e) {
@@ -71,7 +91,6 @@ namespace LibrarySystem {
 			}
 			removeLabels("show");
 		}
-		
 		
 		void ButtonCheckoutClick(object sender, EventArgs e) {
 			if (string.IsNullOrWhiteSpace(textBoxCheckoutId.Text) || string.IsNullOrWhiteSpace(textBoxWeeks.Text)) {
@@ -165,22 +184,28 @@ namespace LibrarySystem {
 			removeLabels("info");
 		}
 		void ButtonRemoveClick(object sender, EventArgs e) {
-			enableBorrowerInfo(true, false, false);
-			enableShowBorrower(true);
-			enableCheckout(false);
-			enableReturn(false);
-			updateListView();
-			borrowers.Remove(currentBorrowerId);
-			labelInfoNotification.Text = "Borrower #" + currentBorrowerId + " deleted.";
-			currentBorrower = null;
-			currentBorrowerId = null;
-			textBoxName.Text = "";
-			textBoxDob.Text = "";
-			removeLabels("info");
+			if (currentBorrower.CheckedOutBooks.Count > 0) {
+				labelInfoNotification.Text = "Must return all books first.";
+			}
+			else if (DialogResult.Yes == MessageBox.Show("Are you sure you want to delete borrower #" + currentBorrowerId + "?",
+			                                        "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)) {
+				enableBorrowerInfo(true, false, false);
+				enableShowBorrower(true);
+				enableCheckout(false);
+				enableReturn(false);
+				updateListView();
+				borrowers.Remove(currentBorrowerId);
+				labelInfoNotification.Text = "Borrower #" + currentBorrowerId + " deleted.";
+				currentBorrower = null;
+				currentBorrowerId = null;
+				textBoxName.Text = "";
+				textBoxDob.Text = "";
+				removeLabels("info");
+			}
 		}
 		
 		void ButtonAddBorrowerClick(object sender, EventArgs e) {
-			addBorrowerForm.parentForm = this;
+			addBorrowerForm.ParentForm = this;
 			addBorrowerForm.ShowDialog();
 		}
 		
@@ -189,12 +214,13 @@ namespace LibrarySystem {
 		}
 		
 		void ButtonAddBookClick(object sender, EventArgs e) {
-			addBookForm.parentForm = this;
+			addBookForm.ParentForm = this;
 			addBookForm.ShowDialog();
 		}
 		
-		void ButtonDeleteBookClick(object sender, EventArgs e) {
-			
+		void ButtonViewBookClick(object sender, EventArgs e) {
+			viewBookForm.ParentForm = this;
+			viewBookForm.ShowDialog();
 		}
 		
 		// TODO: change to enum
@@ -203,17 +229,17 @@ namespace LibrarySystem {
 				labelShowNotification.Text = "";
 			}
 			else if (!doNotRemove.Equals("info")) {
-				labelInfoNotification.Text = "";					
+				labelInfoNotification.Text = "";
 			}
 			else if (!doNotRemove.Equals("checkout")) {
 				labelCheckoutNotification.Text = "";
 			}
 			else if (!doNotRemove.Equals("return")) {
-				labelReturnNotification.Text = "";	
+				labelReturnNotification.Text = "";
 			}
 		}
 		
-		void updateListView() {
+		public void updateListView() {
 			booksListView.Items.Clear();
 			if (currentBorrower != null) {
 				foreach (Book b in (currentBorrower.CheckedOutBooks)) {
@@ -282,7 +308,6 @@ namespace LibrarySystem {
 		
 		void enableShowBorrower(Boolean value) {
 			textBoxBorrowerId.Enabled = value;
-			buttonSearch.Enabled = value;
 			buttonShowBorrower.Enabled = value;
 		}
 		
@@ -290,7 +315,8 @@ namespace LibrarySystem {
 			
 		}
 		void AddBookClick(object sender, EventArgs e) {
-	
+			
 		}
+
 	}
 }

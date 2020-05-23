@@ -94,6 +94,7 @@ namespace LibrarySystem {
 				if (borrower.removeFromCheckedOutBooks(this, isOnTime)) {
 					this.checkoutDate = null;
 					this.returnDate = null;
+					this.avaliable = true;
 					return true;			// success
 				}
 			}

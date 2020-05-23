@@ -2,9 +2,6 @@
 {
 	partial class AddBookForm
 	{
-		/// <summary>
-		/// Designer variable used to keep track of non-visual components.
-		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Label labelTitle;

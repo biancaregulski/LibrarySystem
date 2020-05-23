@@ -6,7 +6,7 @@ namespace LibrarySystem {
 
 	public partial class AddBookForm : Form {
 		
-		public MainForm parentForm { get; set; }
+		public MainForm ParentForm { get; set; }
 		
 		public AddBookForm() {
 			InitializeComponent();
@@ -27,18 +27,9 @@ namespace LibrarySystem {
 					authorFirstName = textBoxFirstName.Text;
 					authorLastName = textBoxLastName.Text;
 					fiction = comboBoxGenre.SelectedIndex.Equals(0) ? true : false;
+					location = this.ParentForm.calculateBookLocation(title, authorLastName, year, fiction);
 					
-					location = (fiction == true) ? "F." : "N.";		// start with number to represent genre
-					for (int i = 0; i < 3; i++) {
-						// give number for nth number of alphabet for first 3 letters of name
-						location +=  (i < authorLastName.Length && Char.IsLetter(authorLastName[i])) ? 
-									 ((int)Char.ToLower(authorLastName[i]) - 96).ToString() : "0";
-						location += ".";
-					}
-					location += Char.ToUpper(title[0]) + ".";
-					location+= year.ToString();
-					
-					int id = this.parentForm.addBook(title, authorFirstName, authorLastName, year, fiction, location);
+					int id = this.ParentForm.addBook(title, authorFirstName, authorLastName, year, fiction, location);
 					
 					labelNotification.Text = "Book #" + id + " added at " + location + ".";
 					textBoxTitle.Text = "";

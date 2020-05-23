@@ -14,7 +14,7 @@ namespace LibrarySystem
 {
 	public partial class AddBorrowerForm : Form {
 		
-		public MainForm parentForm { get; set; }
+		public MainForm ParentForm { get; set; }
 		
 		public AddBorrowerForm() {
 			InitializeComponent();
@@ -25,7 +25,7 @@ namespace LibrarySystem
 				labelNotification.Text = "Name field must be filled in.";
 			}
 			else {
-				int id = this.parentForm.addBorrower(textBoxName.Text, dateTimeDob.Value);
+				int id = this.ParentForm.addBorrower(textBoxName.Text, dateTimeDob.Value);
 				labelNotification.Text = "Borrower #" + id + " added.";
 				textBoxName.Text = "";
 			}

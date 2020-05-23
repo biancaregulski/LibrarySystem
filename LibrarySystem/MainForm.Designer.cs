@@ -33,8 +33,7 @@
 		private System.Windows.Forms.Button buttonCheckout;
 		private System.Windows.Forms.TextBox textBoxWeeks;
 		private System.Windows.Forms.Button buttonAddBorrower;
-		private System.Windows.Forms.Button buttonDeleteBook;
-		private System.Windows.Forms.Button buttonSearch;
+		private System.Windows.Forms.Button buttonViewBook;
 		private System.Windows.Forms.Button buttonRemove;
 		private System.Windows.Forms.Button buttonEdit;
 		private System.Windows.Forms.TextBox textBoxName;
@@ -61,7 +60,6 @@
 		private void InitializeComponent()
 		{
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.buttonSearch = new System.Windows.Forms.Button();
 			this.labelShowNotification = new System.Windows.Forms.Label();
 			this.buttonShowBorrower = new System.Windows.Forms.Button();
 			this.textBoxBorrowerId = new System.Windows.Forms.TextBox();
@@ -94,7 +92,7 @@
 			this.textBoxReturnId = new System.Windows.Forms.TextBox();
 			this.labelReturnId = new System.Windows.Forms.Label();
 			this.buttonAddBorrower = new System.Windows.Forms.Button();
-			this.buttonDeleteBook = new System.Windows.Forms.Button();
+			this.buttonViewBook = new System.Windows.Forms.Button();
 			this.buttonAddBook = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -104,7 +102,6 @@
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.buttonSearch);
 			this.groupBox1.Controls.Add(this.labelShowNotification);
 			this.groupBox1.Controls.Add(this.buttonShowBorrower);
 			this.groupBox1.Controls.Add(this.textBoxBorrowerId);
@@ -116,21 +113,12 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Show Borrower:";
 			// 
-			// buttonSearch
-			// 
-			this.buttonSearch.Location = new System.Drawing.Point(207, 51);
-			this.buttonSearch.Name = "buttonSearch";
-			this.buttonSearch.Size = new System.Drawing.Size(75, 23);
-			this.buttonSearch.TabIndex = 4;
-			this.buttonSearch.Text = "Search";
-			this.buttonSearch.UseVisualStyleBackColor = true;
-			// 
 			// labelShowNotification
 			// 
 			this.labelShowNotification.ForeColor = System.Drawing.SystemColors.HotTrack;
 			this.labelShowNotification.Location = new System.Drawing.Point(7, 54);
 			this.labelShowNotification.Name = "labelShowNotification";
-			this.labelShowNotification.Size = new System.Drawing.Size(194, 23);
+			this.labelShowNotification.Size = new System.Drawing.Size(275, 23);
 			this.labelShowNotification.TabIndex = 3;
 			// 
 			// buttonShowBorrower
@@ -414,14 +402,15 @@
 			this.buttonAddBorrower.UseVisualStyleBackColor = true;
 			this.buttonAddBorrower.Click += new System.EventHandler(this.ButtonAddBorrowerClick);
 			// 
-			// buttonDeleteBook
+			// buttonViewBook
 			// 
-			this.buttonDeleteBook.Location = new System.Drawing.Point(569, 363);
-			this.buttonDeleteBook.Name = "buttonDeleteBook";
-			this.buttonDeleteBook.Size = new System.Drawing.Size(111, 23);
-			this.buttonDeleteBook.TabIndex = 8;
-			this.buttonDeleteBook.Text = "View/Edit Book";
-			this.buttonDeleteBook.UseVisualStyleBackColor = true;
+			this.buttonViewBook.Location = new System.Drawing.Point(569, 363);
+			this.buttonViewBook.Name = "buttonViewBook";
+			this.buttonViewBook.Size = new System.Drawing.Size(111, 23);
+			this.buttonViewBook.TabIndex = 8;
+			this.buttonViewBook.Text = "View/Edit Book";
+			this.buttonViewBook.UseVisualStyleBackColor = true;
+			this.buttonViewBook.Click += new System.EventHandler(this.ButtonViewBookClick);
 			// 
 			// buttonAddBook
 			// 
@@ -439,7 +428,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(688, 396);
 			this.Controls.Add(this.buttonAddBook);
-			this.Controls.Add(this.buttonDeleteBook);
+			this.Controls.Add(this.buttonViewBook);
 			this.Controls.Add(this.buttonAddBorrower);
 			this.Controls.Add(this.booksListView);
 			this.Controls.Add(this.groupBox4);
