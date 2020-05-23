@@ -6,6 +6,8 @@ using System.Windows.Forms;
 // TODO: add search book and search borrower features
 // TODO: hover over text to show full
 // TODO: make return and checkout longer to show notifs
+// TODO: replace text box with masked text box for text only
+// TODO: right click on table to return book (also selcet multiple)
 
 namespace LibrarySystem {
 
@@ -27,8 +29,8 @@ namespace LibrarySystem {
 			InitializeComponent();
 			borrowers =  new Hashtable();
 			books = new Hashtable();
-			borrowers.Add(++borrowIdCount, new Borrower("Lucy Smith", new DateTime(1995, 1, 18)));
-			borrowers.Add(++borrowIdCount, new Borrower("Jack Jacobs", new DateTime(1997, 2, 16)));
+			borrowers.Add(++borrowIdCount, new Borrower("Lucy", "Smith", new DateTime(1995, 1, 18)));
+			borrowers.Add(++borrowIdCount, new Borrower("Jack", "Jacobs", new DateTime(1997, 2, 16)));
 			books.Add(++bookIdCount, new Book("1984", "George", "Orwell", 1949, true, "842.611.854.C"));
 			books.Add(++bookIdCount, new Book("Brave New World", "Aldous", "Huxley", 1932, true, "842.150.656.F"));
 		}
@@ -37,8 +39,8 @@ namespace LibrarySystem {
 			
 		}
 		
-		public int addBorrower(string name, DateTime dt) {
-			borrowers.Add(++borrowIdCount, new Borrower(name, dt));
+		public int addBorrower(string firstName, string lastName, DateTime dt) {
+			borrowers.Add(++borrowIdCount, new Borrower(firstName, lastName, dt));
 			return borrowIdCount;
 		}
 		
@@ -61,6 +63,7 @@ namespace LibrarySystem {
 		}
 		
 		void ButtonShowBorrowerClick(object sender, EventArgs e) {
+			removeLabels();
 			if (string.IsNullOrWhiteSpace(textBoxBorrowerId.Text)) {
 				labelShowNotification.Text = "Borrower ID must be filled in.";
 			}
@@ -72,9 +75,10 @@ namespace LibrarySystem {
 					}
 					else if(borrowers.ContainsKey(borrowerId)) { 					// check if id matches anyone
 						currentBorrowerId = borrowerId;
-						currentBorrower = (Borrower)borrowers[currentBorrowerId];
+						currentBorrower = borrowers[currentBorrowerId] as Borrower;
 						// fill in labels with borrower information
-						textBoxName.Text = currentBorrower.Name;						// TODO: allow to change name
+						textBoxFirstName.Text = currentBorrower.FirstName;
+						textBoxLastName.Text = currentBorrower.LastName;
 						textBoxDob.Text = String.Format("{0:M/d/yyyy}", currentBorrower.Dob);
 						updateListView();
 						updateEnabledForms();
@@ -89,10 +93,10 @@ namespace LibrarySystem {
 					labelShowNotification.Text = "Invalid input.";
 				}
 			}
-			removeLabels("show");
 		}
 		
 		void ButtonCheckoutClick(object sender, EventArgs e) {
+			removeLabels();
 			if (string.IsNullOrWhiteSpace(textBoxCheckoutId.Text) || string.IsNullOrWhiteSpace(textBoxWeeks.Text)) {
 				labelCheckoutNotification.Text = "All fields must be filled in.";
 			}
@@ -126,10 +130,10 @@ namespace LibrarySystem {
 					labelCheckoutNotification.Text = "Invalid input.";
 				}
 			}
-			removeLabels("checkout");
 		}
 		
 		void ButtonReturnClick(object sender, EventArgs e) {
+			removeLabels();
 			if (string.IsNullOrWhiteSpace(textBoxReturnId.Text)) {
 				labelReturnNotification.Text = "Book ID must be filled in.";
 			}
@@ -156,51 +160,71 @@ namespace LibrarySystem {
 					labelReturnNotification.Text = "Invalid input.";
 				}
 			}
-			removeLabels("return");
 		}
 		
 		void ButtonNameEditClick(object sender, EventArgs e) {
+			removeLabels();
 			if (buttonEdit.Text == "Edit") {
-				enableBorrowerInfo(false, false, true);
+				// make user unable to press any buttons unrelated to editing
+				enableBorrowerInfo(true, true);
 				enableShowBorrower(false);
 				enableCheckout(false);
 				enableReturn(false);
 				enabledBottomButtons(false);
-				buttonRemove.Enabled = false;
-				textBoxDob.Visible = false;
+				buttonRemove.Text = "Cancel";
 				dateTimePicker.Visible = true;
 				dateTimePicker.Value = currentBorrower.Dob;
 				buttonEdit.Text = "Save";
+				buttonReturn.Text = "Cancel";
 			}
-			else {
-				currentBorrower.Name = textBoxName.Text;
+			else {				// save changes
+				currentBorrower.FirstName = textBoxFirstName.Text;
+				currentBorrower.LastName = textBoxLastName.Text;
 				currentBorrower.Dob = dateTimePicker.Value;
-				textBoxDob.Visible = true;
 				textBoxDob.Text = String.Format("{0:M/d/yyyy}", currentBorrower.Dob);
 				dateTimePicker.Visible = false;
 				updateEnabledForms();
+				labelInfoNotification.Text = "Borrower #" + currentBorrowerId + " updated.";
 				buttonEdit.Text = "Edit";
+				buttonRemove.Text = "Remove";
 			}
-			removeLabels("info");
 		}
 		void ButtonRemoveClick(object sender, EventArgs e) {
-			if (currentBorrower.CheckedOutBooks.Count > 0) {
-				labelInfoNotification.Text = "Must return all books first.";
+			removeLabels();
+			if (buttonRemove.Text == "Remove") {
+				if (currentBorrower.CheckedOutBooks.Count > 0) {
+					labelInfoNotification.Text = "Must return all books first.";
+				}
+				else if (DialogResult.Yes == MessageBox.Show("Are you sure you want to delete borrower #" + currentBorrowerId + "?",
+				                                             "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)) {
+					enableBorrowerInfo(true, false);
+					enableShowBorrower(true);
+					enableCheckout(false);
+					enableReturn(false);
+					updateListView();
+					borrowers.Remove(currentBorrowerId);
+					labelInfoNotification.Text = "Borrower #" + currentBorrowerId + " deleted.";
+					currentBorrower = null;
+					currentBorrowerId = null;
+					textBoxFirstName.Text = "";
+					textBoxLastName.Text = "";
+					textBoxDob.Text = "";
+				}
+				else {
+					// book was not removed
+					labelInfoNotification.Text = "Borrower was not deleted.";
+				}
 			}
-			else if (DialogResult.Yes == MessageBox.Show("Are you sure you want to delete borrower #" + currentBorrowerId + "?",
-			                                        "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)) {
-				enableBorrowerInfo(true, false, false);
-				enableShowBorrower(true);
-				enableCheckout(false);
-				enableReturn(false);
-				updateListView();
-				borrowers.Remove(currentBorrowerId);
-				labelInfoNotification.Text = "Borrower #" + currentBorrowerId + " deleted.";
-				currentBorrower = null;
-				currentBorrowerId = null;
-				textBoxName.Text = "";
-				textBoxDob.Text = "";
-				removeLabels("info");
+			else {				// cancel changes
+				// don't save changes and revert boxes back to object's values
+				updateEnabledForms();
+				enableBorrowerInfo(false, true);
+				textBoxFirstName.Text = currentBorrower.FirstName;
+				textBoxLastName.Text = currentBorrower.LastName;
+				textBoxDob.Text = String.Format("{0:M/d/yyyy}", currentBorrower.Dob);
+				dateTimePicker.Visible = false;
+				buttonEdit.Text = "Edit";
+				buttonRemove.Text = "Remove";
 			}
 		}
 		
@@ -223,20 +247,11 @@ namespace LibrarySystem {
 			viewBookForm.ShowDialog();
 		}
 		
-		// TODO: change to enum
-		void removeLabels(string doNotRemove) {
-			if (!doNotRemove.Equals("show")) {
-				labelShowNotification.Text = "";
-			}
-			else if (!doNotRemove.Equals("info")) {
-				labelInfoNotification.Text = "";
-			}
-			else if (!doNotRemove.Equals("checkout")) {
-				labelCheckoutNotification.Text = "";
-			}
-			else if (!doNotRemove.Equals("return")) {
-				labelReturnNotification.Text = "";
-			}
+		void removeLabels() {
+			labelShowNotification.Text = "";
+			labelInfoNotification.Text = "";
+			labelCheckoutNotification.Text = "";
+			labelReturnNotification.Text = "";
 		}
 		
 		public void updateListView() {
@@ -277,14 +292,16 @@ namespace LibrarySystem {
 			else {
 				enableCheckout(true);
 			}
-			enableBorrowerInfo(true, true, true);
+			enableShowBorrower(true);
+			enableBorrowerInfo(false, true);
 		}
 		
-		void enableBorrowerInfo(Boolean value, Boolean removeValue, Boolean editValue) {
-			textBoxName.ReadOnly = value;
-			textBoxDob.ReadOnly = value;
-			buttonRemove.Enabled = removeValue;
-			buttonEdit.Enabled = editValue;
+		void enableBorrowerInfo(Boolean value, Boolean buttonValue) {
+			textBoxFirstName.ReadOnly = !value;
+			textBoxLastName.ReadOnly = !value;
+			textBoxDob.ReadOnly = !value;
+			buttonRemove.Enabled = buttonValue;
+			buttonEdit.Enabled = buttonValue;
 		}
 		
 		void enableCheckout(Boolean value) {
@@ -315,6 +332,9 @@ namespace LibrarySystem {
 			
 		}
 		void AddBookClick(object sender, EventArgs e) {
+			
+		}
+		void ButtonSearchBorrowerClick(object sender, EventArgs e) {
 			
 		}
 

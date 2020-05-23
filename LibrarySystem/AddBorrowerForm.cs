@@ -21,13 +21,13 @@ namespace LibrarySystem
 
 		}
 		void ButtonOkClick(object sender, EventArgs e) {
-			if (string.IsNullOrWhiteSpace(textBoxName.Text)) {
+			if (string.IsNullOrWhiteSpace(textBoxFirstName.Text) || string.IsNullOrWhiteSpace(textBoxLastName.Text)) {
 				labelNotification.Text = "Name field must be filled in.";
 			}
 			else {
-				int id = this.ParentForm.addBorrower(textBoxName.Text, dateTimeDob.Value);
+				int id = this.ParentForm.addBorrower(textBoxFirstName.Text, textBoxLastName.Text, dateTimeDob.Value);
 				labelNotification.Text = "Borrower #" + id + " added.";
-				textBoxName.Text = "";
+				textBoxLastName.Text = "";
 			}
 
 		}

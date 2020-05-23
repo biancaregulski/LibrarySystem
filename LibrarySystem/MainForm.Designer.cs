@@ -6,20 +6,20 @@
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox groupBoxShow;
 		private System.Windows.Forms.TextBox textBoxBorrowerId;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button buttonShowBorrower;
-		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.GroupBox groupBoxInfo;
 		private System.Windows.Forms.ListView booksListView;
 		private System.Windows.Forms.ColumnHeader titleColumnHeader;
 		private System.Windows.Forms.ColumnHeader authorColumnHeader;
 		private System.Windows.Forms.ColumnHeader checkoutDateColumnHeader;
 		private System.Windows.Forms.ColumnHeader returnDateColumnHeader;
-		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.GroupBox groupBoxCheckout;
 		private System.Windows.Forms.TextBox textBoxCheckoutId;
 		private System.Windows.Forms.Label labelCheckoutId;
-		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.GroupBox groupBoxReturn;
 		private System.Windows.Forms.Label labelWeeks;
 		private System.Windows.Forms.TextBox textBoxReturnId;
 		private System.Windows.Forms.Button buttonReturn;
@@ -36,11 +36,15 @@
 		private System.Windows.Forms.Button buttonViewBook;
 		private System.Windows.Forms.Button buttonRemove;
 		private System.Windows.Forms.Button buttonEdit;
-		private System.Windows.Forms.TextBox textBoxName;
 		private System.Windows.Forms.TextBox textBoxDob;
 		private System.Windows.Forms.DateTimePicker dateTimePicker;
 		private System.Windows.Forms.Label labelInfoNotification;
 		private System.Windows.Forms.Button buttonAddBook;
+		private System.Windows.Forms.Button buttonSearchBorrower;
+		private System.Windows.Forms.Button buttonSearchBook;
+		private System.Windows.Forms.TextBox textBoxLastName;
+		private System.Windows.Forms.TextBox textBoxFirstName;
+		private System.Windows.Forms.GroupBox groupBoxTable;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -59,16 +63,18 @@
 		/// <summary>
 		private void InitializeComponent()
 		{
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.groupBoxShow = new System.Windows.Forms.GroupBox();
 			this.labelShowNotification = new System.Windows.Forms.Label();
 			this.buttonShowBorrower = new System.Windows.Forms.Button();
 			this.textBoxBorrowerId = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.buttonSearchBorrower = new System.Windows.Forms.Button();
+			this.groupBoxInfo = new System.Windows.Forms.GroupBox();
+			this.textBoxFirstName = new System.Windows.Forms.TextBox();
 			this.labelInfoNotification = new System.Windows.Forms.Label();
 			this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.textBoxDob = new System.Windows.Forms.TextBox();
-			this.textBoxName = new System.Windows.Forms.TextBox();
+			this.textBoxLastName = new System.Windows.Forms.TextBox();
 			this.buttonRemove = new System.Windows.Forms.Button();
 			this.buttonEdit = new System.Windows.Forms.Button();
 			this.labelDob = new System.Windows.Forms.Label();
@@ -79,14 +85,15 @@
 			this.yearColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.checkoutDateColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.returnDateColumnHeader = new System.Windows.Forms.ColumnHeader();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.groupBoxCheckout = new System.Windows.Forms.GroupBox();
 			this.labelCheckoutNotification = new System.Windows.Forms.Label();
 			this.labelWeeks = new System.Windows.Forms.Label();
 			this.textBoxWeeks = new System.Windows.Forms.TextBox();
 			this.buttonCheckout = new System.Windows.Forms.Button();
 			this.textBoxCheckoutId = new System.Windows.Forms.TextBox();
 			this.labelCheckoutId = new System.Windows.Forms.Label();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.buttonSearchBook = new System.Windows.Forms.Button();
+			this.groupBoxReturn = new System.Windows.Forms.GroupBox();
 			this.labelReturnNotification = new System.Windows.Forms.Label();
 			this.buttonReturn = new System.Windows.Forms.Button();
 			this.textBoxReturnId = new System.Windows.Forms.TextBox();
@@ -94,24 +101,26 @@
 			this.buttonAddBorrower = new System.Windows.Forms.Button();
 			this.buttonViewBook = new System.Windows.Forms.Button();
 			this.buttonAddBook = new System.Windows.Forms.Button();
-			this.groupBox1.SuspendLayout();
-			this.groupBox2.SuspendLayout();
-			this.groupBox3.SuspendLayout();
-			this.groupBox4.SuspendLayout();
+			this.groupBoxTable = new System.Windows.Forms.GroupBox();
+			this.groupBoxShow.SuspendLayout();
+			this.groupBoxInfo.SuspendLayout();
+			this.groupBoxCheckout.SuspendLayout();
+			this.groupBoxReturn.SuspendLayout();
+			this.groupBoxTable.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// groupBox1
+			// groupBoxShow
 			// 
-			this.groupBox1.Controls.Add(this.labelShowNotification);
-			this.groupBox1.Controls.Add(this.buttonShowBorrower);
-			this.groupBox1.Controls.Add(this.textBoxBorrowerId);
-			this.groupBox1.Controls.Add(this.label1);
-			this.groupBox1.Location = new System.Drawing.Point(12, 12);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(371, 87);
-			this.groupBox1.TabIndex = 0;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Show Borrower:";
+			this.groupBoxShow.Controls.Add(this.labelShowNotification);
+			this.groupBoxShow.Controls.Add(this.buttonShowBorrower);
+			this.groupBoxShow.Controls.Add(this.textBoxBorrowerId);
+			this.groupBoxShow.Controls.Add(this.label1);
+			this.groupBoxShow.Location = new System.Drawing.Point(12, 12);
+			this.groupBoxShow.Name = "groupBoxShow";
+			this.groupBoxShow.Size = new System.Drawing.Size(371, 87);
+			this.groupBoxShow.TabIndex = 0;
+			this.groupBoxShow.TabStop = false;
+			this.groupBoxShow.Text = "Show Borrower:";
 			// 
 			// labelShowNotification
 			// 
@@ -146,22 +155,41 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Borrower ID:";
 			// 
-			// groupBox2
+			// buttonSearchBorrower
 			// 
-			this.groupBox2.Controls.Add(this.labelInfoNotification);
-			this.groupBox2.Controls.Add(this.dateTimePicker);
-			this.groupBox2.Controls.Add(this.textBoxDob);
-			this.groupBox2.Controls.Add(this.textBoxName);
-			this.groupBox2.Controls.Add(this.buttonRemove);
-			this.groupBox2.Controls.Add(this.buttonEdit);
-			this.groupBox2.Controls.Add(this.labelDob);
-			this.groupBox2.Controls.Add(this.labelName);
-			this.groupBox2.Location = new System.Drawing.Point(12, 105);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(371, 118);
-			this.groupBox2.TabIndex = 1;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Borrower Information:";
+			this.buttonSearchBorrower.Location = new System.Drawing.Point(168, 391);
+			this.buttonSearchBorrower.Name = "buttonSearchBorrower";
+			this.buttonSearchBorrower.Size = new System.Drawing.Size(126, 23);
+			this.buttonSearchBorrower.TabIndex = 4;
+			this.buttonSearchBorrower.Text = "Search Borrower";
+			this.buttonSearchBorrower.UseVisualStyleBackColor = true;
+			this.buttonSearchBorrower.Click += new System.EventHandler(this.ButtonSearchBorrowerClick);
+			// 
+			// groupBoxInfo
+			// 
+			this.groupBoxInfo.Controls.Add(this.textBoxFirstName);
+			this.groupBoxInfo.Controls.Add(this.labelInfoNotification);
+			this.groupBoxInfo.Controls.Add(this.textBoxLastName);
+			this.groupBoxInfo.Controls.Add(this.buttonRemove);
+			this.groupBoxInfo.Controls.Add(this.buttonEdit);
+			this.groupBoxInfo.Controls.Add(this.labelDob);
+			this.groupBoxInfo.Controls.Add(this.labelName);
+			this.groupBoxInfo.Controls.Add(this.dateTimePicker);
+			this.groupBoxInfo.Controls.Add(this.textBoxDob);
+			this.groupBoxInfo.Location = new System.Drawing.Point(12, 105);
+			this.groupBoxInfo.Name = "groupBoxInfo";
+			this.groupBoxInfo.Size = new System.Drawing.Size(371, 118);
+			this.groupBoxInfo.TabIndex = 1;
+			this.groupBoxInfo.TabStop = false;
+			this.groupBoxInfo.Text = "Borrower Information:";
+			// 
+			// textBoxFirstName
+			// 
+			this.textBoxFirstName.Location = new System.Drawing.Point(177, 24);
+			this.textBoxFirstName.Name = "textBoxFirstName";
+			this.textBoxFirstName.ReadOnly = true;
+			this.textBoxFirstName.Size = new System.Drawing.Size(94, 22);
+			this.textBoxFirstName.TabIndex = 13;
 			// 
 			// labelInfoNotification
 			// 
@@ -174,27 +202,27 @@
 			// dateTimePicker
 			// 
 			this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateTimePicker.Location = new System.Drawing.Point(209, 52);
+			this.dateTimePicker.Location = new System.Drawing.Point(177, 52);
 			this.dateTimePicker.Name = "dateTimePicker";
-			this.dateTimePicker.Size = new System.Drawing.Size(156, 22);
+			this.dateTimePicker.Size = new System.Drawing.Size(188, 22);
 			this.dateTimePicker.TabIndex = 9;
 			this.dateTimePicker.Visible = false;
 			// 
 			// textBoxDob
 			// 
-			this.textBoxDob.Location = new System.Drawing.Point(209, 52);
+			this.textBoxDob.Location = new System.Drawing.Point(177, 52);
 			this.textBoxDob.Name = "textBoxDob";
 			this.textBoxDob.ReadOnly = true;
-			this.textBoxDob.Size = new System.Drawing.Size(156, 22);
+			this.textBoxDob.Size = new System.Drawing.Size(188, 22);
 			this.textBoxDob.TabIndex = 11;
 			// 
-			// textBoxName
+			// textBoxLastName
 			// 
-			this.textBoxName.Location = new System.Drawing.Point(209, 23);
-			this.textBoxName.Name = "textBoxName";
-			this.textBoxName.ReadOnly = true;
-			this.textBoxName.Size = new System.Drawing.Size(154, 22);
-			this.textBoxName.TabIndex = 10;
+			this.textBoxLastName.Location = new System.Drawing.Point(277, 23);
+			this.textBoxLastName.Name = "textBoxLastName";
+			this.textBoxLastName.ReadOnly = true;
+			this.textBoxLastName.Size = new System.Drawing.Size(86, 22);
+			this.textBoxLastName.TabIndex = 10;
 			// 
 			// buttonRemove
 			// 
@@ -245,9 +273,9 @@
 			this.booksListView.FullRowSelect = true;
 			this.booksListView.GridLines = true;
 			this.booksListView.HideSelection = false;
-			this.booksListView.Location = new System.Drawing.Point(12, 229);
+			this.booksListView.Location = new System.Drawing.Point(16, 21);
 			this.booksListView.Name = "booksListView";
-			this.booksListView.Size = new System.Drawing.Size(668, 128);
+			this.booksListView.Size = new System.Drawing.Size(688, 122);
 			this.booksListView.TabIndex = 2;
 			this.booksListView.UseCompatibleStateImageBehavior = false;
 			this.booksListView.View = System.Windows.Forms.View.Details;
@@ -277,21 +305,21 @@
 			this.returnDateColumnHeader.Text = "Return Date";
 			this.returnDateColumnHeader.Width = 127;
 			// 
-			// groupBox3
+			// groupBoxCheckout
 			// 
-			this.groupBox3.Controls.Add(this.labelCheckoutNotification);
-			this.groupBox3.Controls.Add(this.labelWeeks);
-			this.groupBox3.Controls.Add(this.textBoxWeeks);
-			this.groupBox3.Controls.Add(this.buttonCheckout);
-			this.groupBox3.Controls.Add(this.textBoxCheckoutId);
-			this.groupBox3.Controls.Add(this.labelCheckoutId);
-			this.groupBox3.ForeColor = System.Drawing.Color.Black;
-			this.groupBox3.Location = new System.Drawing.Point(389, 12);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(291, 120);
-			this.groupBox3.TabIndex = 2;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "Checkout:";
+			this.groupBoxCheckout.Controls.Add(this.labelCheckoutNotification);
+			this.groupBoxCheckout.Controls.Add(this.labelWeeks);
+			this.groupBoxCheckout.Controls.Add(this.textBoxWeeks);
+			this.groupBoxCheckout.Controls.Add(this.buttonCheckout);
+			this.groupBoxCheckout.Controls.Add(this.textBoxCheckoutId);
+			this.groupBoxCheckout.Controls.Add(this.labelCheckoutId);
+			this.groupBoxCheckout.ForeColor = System.Drawing.Color.Black;
+			this.groupBoxCheckout.Location = new System.Drawing.Point(389, 12);
+			this.groupBoxCheckout.Name = "groupBoxCheckout";
+			this.groupBoxCheckout.Size = new System.Drawing.Size(343, 120);
+			this.groupBoxCheckout.TabIndex = 2;
+			this.groupBoxCheckout.TabStop = false;
+			this.groupBoxCheckout.Text = "Checkout:";
 			// 
 			// labelCheckoutNotification
 			// 
@@ -303,7 +331,7 @@
 			// 
 			// labelWeeks
 			// 
-			this.labelWeeks.Location = new System.Drawing.Point(6, 55);
+			this.labelWeeks.Location = new System.Drawing.Point(6, 52);
 			this.labelWeeks.Name = "labelWeeks";
 			this.labelWeeks.Size = new System.Drawing.Size(128, 23);
 			this.labelWeeks.TabIndex = 4;
@@ -312,15 +340,15 @@
 			// textBoxWeeks
 			// 
 			this.textBoxWeeks.Enabled = false;
-			this.textBoxWeeks.Location = new System.Drawing.Point(142, 52);
+			this.textBoxWeeks.Location = new System.Drawing.Point(151, 48);
 			this.textBoxWeeks.Name = "textBoxWeeks";
-			this.textBoxWeeks.Size = new System.Drawing.Size(139, 22);
+			this.textBoxWeeks.Size = new System.Drawing.Size(186, 22);
 			this.textBoxWeeks.TabIndex = 3;
 			// 
 			// buttonCheckout
 			// 
 			this.buttonCheckout.Enabled = false;
-			this.buttonCheckout.Location = new System.Drawing.Point(206, 82);
+			this.buttonCheckout.Location = new System.Drawing.Point(262, 82);
 			this.buttonCheckout.Name = "buttonCheckout";
 			this.buttonCheckout.Size = new System.Drawing.Size(75, 23);
 			this.buttonCheckout.TabIndex = 2;
@@ -331,31 +359,40 @@
 			// textBoxCheckoutId
 			// 
 			this.textBoxCheckoutId.Enabled = false;
-			this.textBoxCheckoutId.Location = new System.Drawing.Point(142, 23);
+			this.textBoxCheckoutId.Location = new System.Drawing.Point(151, 20);
 			this.textBoxCheckoutId.Name = "textBoxCheckoutId";
-			this.textBoxCheckoutId.Size = new System.Drawing.Size(139, 22);
+			this.textBoxCheckoutId.Size = new System.Drawing.Size(186, 22);
 			this.textBoxCheckoutId.TabIndex = 1;
 			// 
 			// labelCheckoutId
 			// 
-			this.labelCheckoutId.Location = new System.Drawing.Point(7, 26);
+			this.labelCheckoutId.Location = new System.Drawing.Point(6, 23);
 			this.labelCheckoutId.Name = "labelCheckoutId";
 			this.labelCheckoutId.Size = new System.Drawing.Size(129, 23);
 			this.labelCheckoutId.TabIndex = 0;
 			this.labelCheckoutId.Text = "Book ID:";
 			// 
-			// groupBox4
+			// buttonSearchBook
 			// 
-			this.groupBox4.Controls.Add(this.labelReturnNotification);
-			this.groupBox4.Controls.Add(this.buttonReturn);
-			this.groupBox4.Controls.Add(this.textBoxReturnId);
-			this.groupBox4.Controls.Add(this.labelReturnId);
-			this.groupBox4.Location = new System.Drawing.Point(389, 131);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(291, 92);
-			this.groupBox4.TabIndex = 3;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Return:";
+			this.buttonSearchBook.Location = new System.Drawing.Point(478, 391);
+			this.buttonSearchBook.Name = "buttonSearchBook";
+			this.buttonSearchBook.Size = new System.Drawing.Size(105, 23);
+			this.buttonSearchBook.TabIndex = 6;
+			this.buttonSearchBook.Text = "Search Book";
+			this.buttonSearchBook.UseVisualStyleBackColor = true;
+			// 
+			// groupBoxReturn
+			// 
+			this.groupBoxReturn.Controls.Add(this.labelReturnNotification);
+			this.groupBoxReturn.Controls.Add(this.buttonReturn);
+			this.groupBoxReturn.Controls.Add(this.textBoxReturnId);
+			this.groupBoxReturn.Controls.Add(this.labelReturnId);
+			this.groupBoxReturn.Location = new System.Drawing.Point(389, 131);
+			this.groupBoxReturn.Name = "groupBoxReturn";
+			this.groupBoxReturn.Size = new System.Drawing.Size(343, 92);
+			this.groupBoxReturn.TabIndex = 3;
+			this.groupBoxReturn.TabStop = false;
+			this.groupBoxReturn.Text = "Return:";
 			// 
 			// labelReturnNotification
 			// 
@@ -368,7 +405,7 @@
 			// buttonReturn
 			// 
 			this.buttonReturn.Enabled = false;
-			this.buttonReturn.Location = new System.Drawing.Point(206, 54);
+			this.buttonReturn.Location = new System.Drawing.Point(262, 54);
 			this.buttonReturn.Name = "buttonReturn";
 			this.buttonReturn.Size = new System.Drawing.Size(75, 23);
 			this.buttonReturn.TabIndex = 2;
@@ -379,9 +416,9 @@
 			// textBoxReturnId
 			// 
 			this.textBoxReturnId.Enabled = false;
-			this.textBoxReturnId.Location = new System.Drawing.Point(140, 23);
+			this.textBoxReturnId.Location = new System.Drawing.Point(151, 23);
 			this.textBoxReturnId.Name = "textBoxReturnId";
-			this.textBoxReturnId.Size = new System.Drawing.Size(139, 22);
+			this.textBoxReturnId.Size = new System.Drawing.Size(186, 22);
 			this.textBoxReturnId.TabIndex = 1;
 			// 
 			// labelReturnId
@@ -394,7 +431,7 @@
 			// 
 			// buttonAddBorrower
 			// 
-			this.buttonAddBorrower.Location = new System.Drawing.Point(12, 363);
+			this.buttonAddBorrower.Location = new System.Drawing.Point(12, 391);
 			this.buttonAddBorrower.Name = "buttonAddBorrower";
 			this.buttonAddBorrower.Size = new System.Drawing.Size(103, 23);
 			this.buttonAddBorrower.TabIndex = 5;
@@ -404,7 +441,7 @@
 			// 
 			// buttonViewBook
 			// 
-			this.buttonViewBook.Location = new System.Drawing.Point(569, 363);
+			this.buttonViewBook.Location = new System.Drawing.Point(621, 391);
 			this.buttonViewBook.Name = "buttonViewBook";
 			this.buttonViewBook.Size = new System.Drawing.Size(111, 23);
 			this.buttonViewBook.TabIndex = 8;
@@ -414,7 +451,7 @@
 			// 
 			// buttonAddBook
 			// 
-			this.buttonAddBook.Location = new System.Drawing.Point(329, 363);
+			this.buttonAddBook.Location = new System.Drawing.Point(329, 391);
 			this.buttonAddBook.Name = "buttonAddBook";
 			this.buttonAddBook.Size = new System.Drawing.Size(82, 23);
 			this.buttonAddBook.TabIndex = 9;
@@ -422,33 +459,46 @@
 			this.buttonAddBook.UseVisualStyleBackColor = true;
 			this.buttonAddBook.Click += new System.EventHandler(this.ButtonAddBookClick);
 			// 
+			// groupBoxTable
+			// 
+			this.groupBoxTable.Controls.Add(this.booksListView);
+			this.groupBoxTable.Location = new System.Drawing.Point(13, 230);
+			this.groupBoxTable.Name = "groupBoxTable";
+			this.groupBoxTable.Size = new System.Drawing.Size(719, 155);
+			this.groupBoxTable.TabIndex = 10;
+			this.groupBoxTable.TabStop = false;
+			this.groupBoxTable.Text = "Checked out books:";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(688, 396);
+			this.ClientSize = new System.Drawing.Size(744, 425);
+			this.Controls.Add(this.groupBoxTable);
+			this.Controls.Add(this.buttonSearchBook);
+			this.Controls.Add(this.buttonSearchBorrower);
 			this.Controls.Add(this.buttonAddBook);
 			this.Controls.Add(this.buttonViewBook);
 			this.Controls.Add(this.buttonAddBorrower);
-			this.Controls.Add(this.booksListView);
-			this.Controls.Add(this.groupBox4);
-			this.Controls.Add(this.groupBox3);
-			this.Controls.Add(this.groupBox2);
-			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(this.groupBoxReturn);
+			this.Controls.Add(this.groupBoxCheckout);
+			this.Controls.Add(this.groupBoxInfo);
+			this.Controls.Add(this.groupBoxShow);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Borrower Information";
 			this.Load += new System.EventHandler(this.MainFormLoad);
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
-			this.groupBox2.ResumeLayout(false);
-			this.groupBox2.PerformLayout();
-			this.groupBox3.ResumeLayout(false);
-			this.groupBox3.PerformLayout();
-			this.groupBox4.ResumeLayout(false);
-			this.groupBox4.PerformLayout();
+			this.groupBoxShow.ResumeLayout(false);
+			this.groupBoxShow.PerformLayout();
+			this.groupBoxInfo.ResumeLayout(false);
+			this.groupBoxInfo.PerformLayout();
+			this.groupBoxCheckout.ResumeLayout(false);
+			this.groupBoxCheckout.PerformLayout();
+			this.groupBoxReturn.ResumeLayout(false);
+			this.groupBoxReturn.PerformLayout();
+			this.groupBoxTable.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

@@ -17,9 +17,10 @@ namespace LibrarySystem
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Label labelNotification;
 		private System.Windows.Forms.Label labelName;
-		private System.Windows.Forms.TextBox textBoxName;
+		private System.Windows.Forms.TextBox textBoxLastName;
 		private System.Windows.Forms.Label labelDob;
 		private System.Windows.Forms.DateTimePicker dateTimeDob;
+		private System.Windows.Forms.TextBox textBoxFirstName;
 
 		protected override void Dispose(bool disposing)
 		{
@@ -34,11 +35,12 @@ namespace LibrarySystem
 		private void InitializeComponent()
 		{
 			this.labelName = new System.Windows.Forms.Label();
-			this.textBoxName = new System.Windows.Forms.TextBox();
+			this.textBoxLastName = new System.Windows.Forms.TextBox();
 			this.labelDob = new System.Windows.Forms.Label();
 			this.dateTimeDob = new System.Windows.Forms.DateTimePicker();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.labelNotification = new System.Windows.Forms.Label();
+			this.textBoxFirstName = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// labelName
@@ -47,14 +49,14 @@ namespace LibrarySystem
 			this.labelName.Name = "labelName";
 			this.labelName.Size = new System.Drawing.Size(100, 23);
 			this.labelName.TabIndex = 0;
-			this.labelName.Text = "Name";
+			this.labelName.Text = "Name:";
 			// 
-			// textBoxName
+			// textBoxLastName
 			// 
-			this.textBoxName.Location = new System.Drawing.Point(133, 13);
-			this.textBoxName.Name = "textBoxName";
-			this.textBoxName.Size = new System.Drawing.Size(174, 22);
-			this.textBoxName.TabIndex = 1;
+			this.textBoxLastName.Location = new System.Drawing.Point(223, 10);
+			this.textBoxLastName.Name = "textBoxLastName";
+			this.textBoxLastName.Size = new System.Drawing.Size(84, 22);
+			this.textBoxLastName.TabIndex = 1;
 			// 
 			// labelDob
 			// 
@@ -90,16 +92,24 @@ namespace LibrarySystem
 			this.labelNotification.Size = new System.Drawing.Size(216, 23);
 			this.labelNotification.TabIndex = 7;
 			// 
+			// textBoxFirstName
+			// 
+			this.textBoxFirstName.Location = new System.Drawing.Point(133, 10);
+			this.textBoxFirstName.Name = "textBoxFirstName";
+			this.textBoxFirstName.Size = new System.Drawing.Size(84, 22);
+			this.textBoxFirstName.TabIndex = 8;
+			// 
 			// AddBorrowerForm
 			// 
 			this.AcceptButton = this.buttonOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(322, 115);
+			this.Controls.Add(this.textBoxFirstName);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.dateTimeDob);
 			this.Controls.Add(this.labelDob);
-			this.Controls.Add(this.textBoxName);
+			this.Controls.Add(this.textBoxLastName);
 			this.Controls.Add(this.labelName);
 			this.Controls.Add(this.labelNotification);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
