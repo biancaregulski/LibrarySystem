@@ -5,96 +5,51 @@ using System.Windows.Forms;
 
 namespace LibrarySystem {
 	public class Book {
+		public string Title { get; set;	}
+		public string AuthorFirstName { get; set; }
+		public string AuthorLastName { get; set; }
+		public int Year { get; set;	}
+		public int Id { get; set; }
+		public string Location { get; set; }
+		public Boolean Avaliable { get; set; }
+		public Boolean Fiction { get; set; }
+		public DateTime? CheckoutDate { get; set; }
+		public DateTime? ReturnDate { get; set; }
 		
-		private string title;
-		public string Title {
-			get { return title; }
-			set { title = value; }
+		public Book(int id, String title, String authorFirstName, string authorLastName, int year, Boolean fiction, string location) {
+			Id = id;
+			Title = title;
+			AuthorFirstName = authorFirstName;
+			AuthorLastName = authorLastName;
+			Year = year;
+			Fiction = fiction;
+			Avaliable = true;
+			Location = location;
 		}
 		
-		private string authorFirstName;
-		public string AuthorFirstName {
-			get { return authorFirstName; }
-			set { authorFirstName = value; }
-		}
-		
-		private string authorLastName;
-		public string AuthorLastName {
-			get { return authorLastName; }
-			set { authorLastName = value; }
-		}
-		
-		private int year;
-		public int Year {
-			get { return year; }
-			set { year = value; }
-		}
-		
-		private string location;
-		public string Location {
-			get { return location; }
-			set { location = value; }
-		}
-		
-		private Boolean avaliable = true;
-		public Boolean Avaliable {
-			get { return avaliable; }
-			set { avaliable = value; }
-		}
-		
-		private Boolean fiction;
-		public Boolean Fiction {
-			get {return fiction; }
-			set {fiction = value; }
-		}
-		
-		private DateTime? checkoutDate;
-		public DateTime? CheckoutDate {
-			get { return checkoutDate; }
-			set { checkoutDate = value; }
-		}
-		
-		private DateTime? returnDate;
-		public DateTime? ReturnDate {
-			get { return returnDate; }
-			set { returnDate = value; }
-		}
-		
-		public Book(String title, String authorFirstName, string authorLastName, int year, Boolean fiction, string location) {
-			this.title = title;
-			this.authorFirstName = authorFirstName;
-			this.authorLastName = authorLastName;
-			this.year = year;
-			this.fiction = fiction;
-			this.avaliable = true;
-			this.location = location;
-		}
-		
-		// fails if book is already checkout out or borrower is now allowed to check out
-		public Boolean checkoutBook(Borrower borrower, int weeks) {
-			if (checkoutDate == null) {
-				if (!borrower.Restriction) {
-					this.checkoutDate = DateTime.Now;
-					this.returnDate = checkoutDate.Value.AddDays(weeks * 7);
-					if (borrower.addToCheckedOutBooks(this)) {
-						this.avaliable = false;
-						return true;
-					}
+		// fails if book is chcked out by other borrower or this borrower is now allowed to check out
+		public Boolean checkoutOrRenewBook(Borrower borrower, int weeks) {
+			if (!borrower.Restriction) {
+				this.CheckoutDate = DateTime.Now;
+				this.ReturnDate = CheckoutDate.Value.AddDays(weeks * 7);
+				if (borrower.addToCheckedOutBooks(this)) {
+					this.Avaliable = false;
+					return true;
 				}
 			}
 			return false;
 		}
 		
 		public Boolean returnBook(Borrower borrower) {
-			if (checkoutDate != null) {
+			if (CheckoutDate != null) {
 				Boolean isOnTime = false;
-				if (DateTime.Now < this.returnDate) {
+				if (DateTime.Now < this.ReturnDate) {
 					isOnTime = true;
 				}
 				if (borrower.removeFromCheckedOutBooks(this, isOnTime)) {
-					this.checkoutDate = null;
-					this.returnDate = null;
-					this.avaliable = true;
+					this.CheckoutDate = null;
+					this.ReturnDate = null;
+					this.Avaliable = true;
 					return true;			// success
 				}
 			}

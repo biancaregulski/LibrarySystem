@@ -45,6 +45,9 @@
 		private System.Windows.Forms.TextBox textBoxLastName;
 		private System.Windows.Forms.TextBox textBoxFirstName;
 		private System.Windows.Forms.GroupBox groupBoxTable;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripBooks;
+		private System.Windows.Forms.ToolStripMenuItem returnToolStripMenuItem;
+		private System.Windows.Forms.ColumnHeader IdcolumnHeader;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -59,10 +62,10 @@
 			}
 			base.Dispose(disposing);
 		}
-		
 		/// <summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.groupBoxShow = new System.Windows.Forms.GroupBox();
 			this.labelShowNotification = new System.Windows.Forms.Label();
 			this.buttonShowBorrower = new System.Windows.Forms.Button();
@@ -72,19 +75,22 @@
 			this.groupBoxInfo = new System.Windows.Forms.GroupBox();
 			this.textBoxFirstName = new System.Windows.Forms.TextBox();
 			this.labelInfoNotification = new System.Windows.Forms.Label();
-			this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-			this.textBoxDob = new System.Windows.Forms.TextBox();
 			this.textBoxLastName = new System.Windows.Forms.TextBox();
 			this.buttonRemove = new System.Windows.Forms.Button();
 			this.buttonEdit = new System.Windows.Forms.Button();
 			this.labelDob = new System.Windows.Forms.Label();
 			this.labelName = new System.Windows.Forms.Label();
+			this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+			this.textBoxDob = new System.Windows.Forms.TextBox();
 			this.booksListView = new System.Windows.Forms.ListView();
+			this.IdcolumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.titleColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.authorColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.yearColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.checkoutDateColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.returnDateColumnHeader = new System.Windows.Forms.ColumnHeader();
+			this.contextMenuStripBooks = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.returnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupBoxCheckout = new System.Windows.Forms.GroupBox();
 			this.labelCheckoutNotification = new System.Windows.Forms.Label();
 			this.labelWeeks = new System.Windows.Forms.Label();
@@ -104,6 +110,7 @@
 			this.groupBoxTable = new System.Windows.Forms.GroupBox();
 			this.groupBoxShow.SuspendLayout();
 			this.groupBoxInfo.SuspendLayout();
+			this.contextMenuStripBooks.SuspendLayout();
 			this.groupBoxCheckout.SuspendLayout();
 			this.groupBoxReturn.SuspendLayout();
 			this.groupBoxTable.SuspendLayout();
@@ -199,23 +206,6 @@
 			this.labelInfoNotification.Size = new System.Drawing.Size(194, 23);
 			this.labelInfoNotification.TabIndex = 12;
 			// 
-			// dateTimePicker
-			// 
-			this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateTimePicker.Location = new System.Drawing.Point(177, 52);
-			this.dateTimePicker.Name = "dateTimePicker";
-			this.dateTimePicker.Size = new System.Drawing.Size(188, 22);
-			this.dateTimePicker.TabIndex = 9;
-			this.dateTimePicker.Visible = false;
-			// 
-			// textBoxDob
-			// 
-			this.textBoxDob.Location = new System.Drawing.Point(177, 52);
-			this.textBoxDob.Name = "textBoxDob";
-			this.textBoxDob.ReadOnly = true;
-			this.textBoxDob.Size = new System.Drawing.Size(188, 22);
-			this.textBoxDob.TabIndex = 11;
-			// 
 			// textBoxLastName
 			// 
 			this.textBoxLastName.Location = new System.Drawing.Point(277, 23);
@@ -262,33 +252,57 @@
 			this.labelName.TabIndex = 0;
 			this.labelName.Text = "Name:";
 			// 
+			// dateTimePicker
+			// 
+			this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dateTimePicker.Location = new System.Drawing.Point(177, 52);
+			this.dateTimePicker.Name = "dateTimePicker";
+			this.dateTimePicker.Size = new System.Drawing.Size(188, 22);
+			this.dateTimePicker.TabIndex = 9;
+			this.dateTimePicker.Visible = false;
+			// 
+			// textBoxDob
+			// 
+			this.textBoxDob.Location = new System.Drawing.Point(177, 52);
+			this.textBoxDob.Name = "textBoxDob";
+			this.textBoxDob.ReadOnly = true;
+			this.textBoxDob.Size = new System.Drawing.Size(188, 22);
+			this.textBoxDob.TabIndex = 11;
+			// 
 			// booksListView
 			// 
 			this.booksListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.IdcolumnHeader,
 			this.titleColumnHeader,
 			this.authorColumnHeader,
 			this.yearColumnHeader,
 			this.checkoutDateColumnHeader,
 			this.returnDateColumnHeader});
+			this.booksListView.ContextMenuStrip = this.contextMenuStripBooks;
 			this.booksListView.FullRowSelect = true;
 			this.booksListView.GridLines = true;
 			this.booksListView.HideSelection = false;
 			this.booksListView.Location = new System.Drawing.Point(16, 21);
+			this.booksListView.MultiSelect = false;
 			this.booksListView.Name = "booksListView";
-			this.booksListView.Size = new System.Drawing.Size(688, 122);
+			this.booksListView.Size = new System.Drawing.Size(688, 128);
 			this.booksListView.TabIndex = 2;
 			this.booksListView.UseCompatibleStateImageBehavior = false;
 			this.booksListView.View = System.Windows.Forms.View.Details;
 			// 
+			// IdcolumnHeader
+			// 
+			this.IdcolumnHeader.Text = "ID";
+			// 
 			// titleColumnHeader
 			// 
 			this.titleColumnHeader.Text = "Title";
-			this.titleColumnHeader.Width = 164;
+			this.titleColumnHeader.Width = 170;
 			// 
 			// authorColumnHeader
 			// 
 			this.authorColumnHeader.Text = "Author";
-			this.authorColumnHeader.Width = 160;
+			this.authorColumnHeader.Width = 161;
 			// 
 			// yearColumnHeader
 			// 
@@ -298,12 +312,27 @@
 			// checkoutDateColumnHeader
 			// 
 			this.checkoutDateColumnHeader.Text = "Checkout Date";
-			this.checkoutDateColumnHeader.Width = 140;
+			this.checkoutDateColumnHeader.Width = 110;
 			// 
 			// returnDateColumnHeader
 			// 
 			this.returnDateColumnHeader.Text = "Return Date";
-			this.returnDateColumnHeader.Width = 127;
+			this.returnDateColumnHeader.Width = 110;
+			// 
+			// contextMenuStripBooks
+			// 
+			this.contextMenuStripBooks.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.contextMenuStripBooks.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.returnToolStripMenuItem});
+			this.contextMenuStripBooks.Name = "contextMenuStripBooks";
+			this.contextMenuStripBooks.Size = new System.Drawing.Size(122, 28);
+			// 
+			// returnToolStripMenuItem
+			// 
+			this.returnToolStripMenuItem.Name = "returnToolStripMenuItem";
+			this.returnToolStripMenuItem.Size = new System.Drawing.Size(121, 24);
+			this.returnToolStripMenuItem.Text = "Return";
+			this.returnToolStripMenuItem.Click += new System.EventHandler(this.ReturnToolStripMenuItemClick);
 			// 
 			// groupBoxCheckout
 			// 
@@ -319,14 +348,14 @@
 			this.groupBoxCheckout.Size = new System.Drawing.Size(343, 120);
 			this.groupBoxCheckout.TabIndex = 2;
 			this.groupBoxCheckout.TabStop = false;
-			this.groupBoxCheckout.Text = "Checkout:";
+			this.groupBoxCheckout.Text = "Checkout/Renew:";
 			// 
 			// labelCheckoutNotification
 			// 
 			this.labelCheckoutNotification.ForeColor = System.Drawing.SystemColors.HotTrack;
 			this.labelCheckoutNotification.Location = new System.Drawing.Point(6, 82);
 			this.labelCheckoutNotification.Name = "labelCheckoutNotification";
-			this.labelCheckoutNotification.Size = new System.Drawing.Size(199, 23);
+			this.labelCheckoutNotification.Size = new System.Drawing.Size(250, 23);
 			this.labelCheckoutNotification.TabIndex = 5;
 			// 
 			// labelWeeks
@@ -399,7 +428,7 @@
 			this.labelReturnNotification.ForeColor = System.Drawing.SystemColors.HotTrack;
 			this.labelReturnNotification.Location = new System.Drawing.Point(6, 54);
 			this.labelReturnNotification.Name = "labelReturnNotification";
-			this.labelReturnNotification.Size = new System.Drawing.Size(188, 23);
+			this.labelReturnNotification.Size = new System.Drawing.Size(250, 23);
 			this.labelReturnNotification.TabIndex = 3;
 			// 
 			// buttonReturn
@@ -494,6 +523,7 @@
 			this.groupBoxShow.PerformLayout();
 			this.groupBoxInfo.ResumeLayout(false);
 			this.groupBoxInfo.PerformLayout();
+			this.contextMenuStripBooks.ResumeLayout(false);
 			this.groupBoxCheckout.ResumeLayout(false);
 			this.groupBoxCheckout.PerformLayout();
 			this.groupBoxReturn.ResumeLayout(false);

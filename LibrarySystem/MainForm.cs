@@ -21,9 +21,10 @@ namespace LibrarySystem {
 		int borrowIdCount = 0;
 		int bookIdCount = 0;
 		
-		AddBorrowerForm addBorrowerForm = new AddBorrowerForm ();
-		AddBookForm addBookForm = new AddBookForm ();
-		ViewBookForm viewBookForm = new ViewBookForm ();
+		AddBorrowerForm addBorrowerForm = new AddBorrowerForm();
+		AddBookForm addBookForm = new AddBookForm();
+		ViewBookForm viewBookForm = new ViewBookForm();
+		SearchBorrower searchBorrower = new SearchBorrower();
 		
 		public MainForm() {
 			InitializeComponent();
@@ -31,8 +32,8 @@ namespace LibrarySystem {
 			books = new Hashtable();
 			borrowers.Add(++borrowIdCount, new Borrower("Lucy", "Smith", new DateTime(1995, 1, 18)));
 			borrowers.Add(++borrowIdCount, new Borrower("Jack", "Jacobs", new DateTime(1997, 2, 16)));
-			books.Add(++bookIdCount, new Book("1984", "George", "Orwell", 1949, true, "842.611.854.C"));
-			books.Add(++bookIdCount, new Book("Brave New World", "Aldous", "Huxley", 1932, true, "842.150.656.F"));
+			books.Add(++bookIdCount, new Book(bookIdCount, "1984", "George", "Orwell", 1949, true, "842.611.854.C"));
+			books.Add(++bookIdCount, new Book(bookIdCount, "Brave New World", "Aldous", "Huxley", 1932, true, "842.150.656.F"));
 		}
 		
 		void MainFormLoad(object sender, EventArgs e) {
@@ -45,7 +46,7 @@ namespace LibrarySystem {
 		}
 		
 		public int addBook(string title, string authorFirstName, string authorLastName, int year, Boolean genre, string location) {
-			books.Add(++bookIdCount, new Book(title, authorFirstName, authorLastName, year, genre, location));
+			books.Add(++bookIdCount, new Book(bookIdCount, title, authorFirstName, authorLastName, year, genre, location));
 			return bookIdCount;
 		}
 		
@@ -74,16 +75,7 @@ namespace LibrarySystem {
 						labelShowNotification.Text = "ID #" + borrowerId + " already accessed.";
 					}
 					else if(borrowers.ContainsKey(borrowerId)) { 					// check if id matches anyone
-						currentBorrowerId = borrowerId;
-						currentBorrower = borrowers[currentBorrowerId] as Borrower;
-						// fill in labels with borrower information
-						textBoxFirstName.Text = currentBorrower.FirstName;
-						textBoxLastName.Text = currentBorrower.LastName;
-						textBoxDob.Text = String.Format("{0:M/d/yyyy}", currentBorrower.Dob);
-						updateListView();
-						updateEnabledForms();
-						labelShowNotification.Text = "Accessing account of #" + borrowerId + ".";
-						textBoxBorrowerId.Text = "";
+						loginBorrower(borrowerId);
 					}
 					else {
 						labelShowNotification.Text = "ID #" + borrowerId + " not found.";
@@ -114,10 +106,21 @@ namespace LibrarySystem {
 					
 					else {					// check if id matches any book
 						Book currentBook = (Book)(books[bookId]);
-						if (currentBook.checkoutBook(currentBorrower, numWeeks)) {
+						if (currentBook.CheckoutDate == null || currentBorrower.CheckedOutBooks.Contains(currentBook)) {
+							if (currentBook.CheckoutDate == null) {
+								currentBook.checkoutOrRenewBook(currentBorrower, numWeeks);
+								labelCheckoutNotification.Text = "Checked out book.";
+								if (currentBorrower.CheckedOutBooks.Count >= 5) {
+									labelCheckoutNotification.Text += " Book limit reached.";
+								}
+							}
+							else {
+								currentBorrower.CheckedOutBooks.Remove(currentBook);
+								currentBook.checkoutOrRenewBook(currentBorrower, numWeeks);
+								labelCheckoutNotification.Text = "Renewed book.";
+							}
 							updateListView();
 							updateEnabledForms();
-							labelCheckoutNotification.Text = "Checked out book #" + bookId + " for " + numWeeks + " week(s).";
 							textBoxCheckoutId.Text = "";
 							textBoxWeeks.Text = "";
 						}
@@ -143,17 +146,8 @@ namespace LibrarySystem {
 					if (!books.ContainsKey(bookId)) {
 						labelReturnNotification.Text = "Invalid book ID.";
 					}
-					else {					// check if id matches any book
-						Book currentBook = (Book)(books[bookId]);
-						if (currentBook.returnBook(currentBorrower)) {
-							updateListView();
-							updateEnabledForms();
-							labelReturnNotification.Text = "Returned book #" + bookId + ".";
-							textBoxReturnId.Text = "";
-						}
-						else {
-							labelReturnNotification.Text = "Book not checked out by this borrower.";
-						}
+					else {
+						returnSelectedBook(bookId);
 					}
 				}
 				else {
@@ -246,6 +240,40 @@ namespace LibrarySystem {
 			viewBookForm.ParentForm = this;
 			viewBookForm.ShowDialog();
 		}
+		void ButtonSearchBorrowerClick(object sender, EventArgs e) {
+			searchBorrower.ParentForm = this;
+			searchBorrower.ShowDialog();
+		}
+		
+		Boolean returnSelectedBook(int bookId) {
+			removeLabels();
+			// check if id matches any book
+			Book currentBook = books[bookId] as Book;
+			if (currentBook.returnBook(currentBorrower)) {
+				updateListView();
+				updateEnabledForms();
+				labelReturnNotification.Text = "Returned book #" + bookId + ".";
+				textBoxReturnId.Text = "";
+				return true;
+			}
+			else {
+				labelReturnNotification.Text = "Book not checked out by this borrower.";
+				return false;
+			}
+		}
+		
+		public void loginBorrower(int borrowerId) {
+			currentBorrowerId = borrowerId;
+			currentBorrower = borrowers[currentBorrowerId] as Borrower;
+			// fill in labels with borrower information
+			textBoxFirstName.Text = currentBorrower.FirstName;
+			textBoxLastName.Text = currentBorrower.LastName;
+			textBoxDob.Text = String.Format("{0:M/d/yyyy}", currentBorrower.Dob);
+			updateListView();
+			updateEnabledForms();
+			labelShowNotification.Text = "Accessing account of #" + borrowerId + ".";
+			textBoxBorrowerId.Text = "";
+		}
 		
 		void removeLabels() {
 			labelShowNotification.Text = "";
@@ -258,12 +286,13 @@ namespace LibrarySystem {
 			booksListView.Items.Clear();
 			if (currentBorrower != null) {
 				foreach (Book b in (currentBorrower.CheckedOutBooks)) {
-					string[] arr = new string[5];
-					arr[0] = b.Title;
-					arr[1] = b.AuthorFirstName + " " + b.AuthorLastName;
-					arr[2] = b.Year.ToString();
-					arr[3] = String.Format("{0:MM/dd/yyyy HH:mm}", b.CheckoutDate);
-					arr[4] = String.Format("{0:MM/dd/yyyy HH:mm}", b.ReturnDate);
+					string[] arr = new string[6];
+					arr[0] = b.Id.ToString();;
+					arr[1] = b.Title;
+					arr[2] = b.AuthorFirstName + " " + b.AuthorLastName;
+					arr[3] = b.Year.ToString();
+					arr[4] = String.Format("{0:M/d/yyyy}", b.CheckoutDate);
+					arr[5] = String.Format("{0:M/d/yyyy}", b.ReturnDate);
 					ListViewItem item = new ListViewItem(arr);
 					
 					if (DateTime.Now > b.ReturnDate) {
@@ -334,9 +363,12 @@ namespace LibrarySystem {
 		void AddBookClick(object sender, EventArgs e) {
 			
 		}
-		void ButtonSearchBorrowerClick(object sender, EventArgs e) {
-			
+		void ReturnToolStripMenuItemClick(object sender, EventArgs e) {
+			if (booksListView.SelectedItems.Count == 1) {
+				// get book that matches id number from first column of selected item
+				int bookId = Int32.Parse(booksListView.SelectedItems[0].SubItems[0].Text);
+				returnSelectedBook(bookId);
+			}
 		}
-
 	}
 }

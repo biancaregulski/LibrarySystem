@@ -56,7 +56,7 @@ namespace LibrarySystem
 			this.textBoxLastName.Location = new System.Drawing.Point(223, 10);
 			this.textBoxLastName.Name = "textBoxLastName";
 			this.textBoxLastName.Size = new System.Drawing.Size(84, 22);
-			this.textBoxLastName.TabIndex = 1;
+			this.textBoxLastName.TabIndex = 2;
 			// 
 			// labelDob
 			// 
@@ -97,7 +97,7 @@ namespace LibrarySystem
 			this.textBoxFirstName.Location = new System.Drawing.Point(133, 10);
 			this.textBoxFirstName.Name = "textBoxFirstName";
 			this.textBoxFirstName.Size = new System.Drawing.Size(84, 22);
-			this.textBoxFirstName.TabIndex = 8;
+			this.textBoxFirstName.TabIndex = 1;
 			// 
 			// AddBorrowerForm
 			// 

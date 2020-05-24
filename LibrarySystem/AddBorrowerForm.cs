@@ -1,17 +1,8 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Bianca
- * Date: 5/16/2020
- * Time: 9:28 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LibrarySystem
-{
+namespace LibrarySystem {
 	public partial class AddBorrowerForm : Form {
 		
 		public MainForm ParentForm { get; set; }
@@ -27,6 +18,7 @@ namespace LibrarySystem
 			else {
 				int id = this.ParentForm.addBorrower(textBoxFirstName.Text, textBoxLastName.Text, dateTimeDob.Value);
 				labelNotification.Text = "Borrower #" + id + " added.";
+				textBoxFirstName.Text = "";
 				textBoxLastName.Text = "";
 			}
 
