@@ -166,7 +166,7 @@ namespace LibrarySystem
 			this.MaximizeBox = false;
 			this.Name = "SearchBorrower";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "SearchBorrower";
+			this.Text = "Search Borrower";
 			this.contextMenuStripBorrowers.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
