@@ -27,12 +27,10 @@ namespace LibrarySystem {
 				// for each borrower, if searched name is part of borrower's name, show result in the table
 				foreach (DictionaryEntry borrower in ParentForm.borrowers) {
 					// make both strings lowercase to make search case-insensitive
-					if ((!string.IsNullOrWhiteSpace(textBoxFirstName.Text) && string.IsNullOrWhiteSpace(textBoxLastName.Text)
-					     && (borrower.Value as Borrower).FirstName.ToLower().Contains(textBoxFirstName.Text.ToLower()))
-					    || (string.IsNullOrWhiteSpace(textBoxFirstName.Text) && !string.IsNullOrWhiteSpace(textBoxLastName.Text)
-					        && (borrower.Value as Borrower).LastName.ToLower().Contains(textBoxLastName.Text.ToLower()))
-					    || ((borrower.Value as Borrower).FirstName.ToLower().Contains(textBoxFirstName.Text.ToLower())
-					        && (borrower.Value as Borrower).LastName.ToLower().Contains(textBoxLastName.Text.ToLower()))) {
+					if ((string.IsNullOrWhiteSpace(textBoxFirstName.Text) 
+					     || (borrower.Value as Borrower).FirstName.ToLower().Contains(textBoxFirstName.Text.ToLower()))
+					     &&  (string.IsNullOrWhiteSpace(textBoxLastName.Text)
+					     ||  (borrower.Value as Borrower).LastName.ToLower().Contains(textBoxLastName.Text.ToLower()))) {
 						addToListView(borrower);
 					}
 				}

@@ -89,8 +89,6 @@ namespace LibrarySystem {
 					labelNotification.Text = "All fields must be filled in.";
 				}
 				else {
-					string title, authorFirstName, authorLastName, location;
-					Boolean fiction;
 					int year;
 					if (Int32.TryParse(textBoxYear.Text, out year)) {
 						currentBook.Title = textBoxTitle.Text;

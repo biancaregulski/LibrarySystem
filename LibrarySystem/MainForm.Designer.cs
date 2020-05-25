@@ -403,12 +403,13 @@
 			// 
 			// buttonSearchBook
 			// 
-			this.buttonSearchBook.Location = new System.Drawing.Point(478, 391);
+			this.buttonSearchBook.Location = new System.Drawing.Point(470, 391);
 			this.buttonSearchBook.Name = "buttonSearchBook";
 			this.buttonSearchBook.Size = new System.Drawing.Size(105, 23);
 			this.buttonSearchBook.TabIndex = 6;
 			this.buttonSearchBook.Text = "Search Book";
 			this.buttonSearchBook.UseVisualStyleBackColor = true;
+			this.buttonSearchBook.Click += new System.EventHandler(this.ButtonSearchBookClick);
 			// 
 			// groupBoxReturn
 			// 
@@ -480,7 +481,7 @@
 			// 
 			// buttonAddBook
 			// 
-			this.buttonAddBook.Location = new System.Drawing.Point(329, 391);
+			this.buttonAddBook.Location = new System.Drawing.Point(340, 391);
 			this.buttonAddBook.Name = "buttonAddBook";
 			this.buttonAddBook.Size = new System.Drawing.Size(82, 23);
 			this.buttonAddBook.TabIndex = 9;

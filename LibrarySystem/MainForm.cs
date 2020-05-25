@@ -3,12 +3,6 @@ using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
-// TODO: add search book and search borrower features
-// TODO: hover over text to show full
-// TODO: make return and checkout longer to show notifs
-// TODO: replace text box with masked text box for text only
-// TODO: right click on table to return book (also selcet multiple)
-
 namespace LibrarySystem {
 
 	public partial class MainForm : Form {
@@ -25,6 +19,7 @@ namespace LibrarySystem {
 		AddBookForm addBookForm = new AddBookForm();
 		ViewBookForm viewBookForm = new ViewBookForm();
 		SearchBorrower searchBorrower = new SearchBorrower();
+		SearchBook searchBook = new SearchBook();
 		
 		public MainForm() {
 			InitializeComponent();
@@ -243,6 +238,11 @@ namespace LibrarySystem {
 		void ButtonSearchBorrowerClick(object sender, EventArgs e) {
 			searchBorrower.ParentForm = this;
 			searchBorrower.ShowDialog();
+		}
+		
+		void ButtonSearchBookClick(object sender, EventArgs e) {
+			searchBook.ParentForm = this;
+			searchBook.ShowDialog();
 		}
 		
 		Boolean returnSelectedBook(int bookId) {
