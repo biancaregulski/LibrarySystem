@@ -14,7 +14,8 @@ namespace LibrarySystem {
 		
 		int borrowIdCount = 0;
 		int bookIdCount = 0;
-		
+
+		ServerConnectForm serverConnectForm = new ServerConnectForm();
 		AddBorrowerForm addBorrowerForm = new AddBorrowerForm();
 		AddBookForm addBookForm = new AddBookForm();
 		ViewBookForm viewBookForm = new ViewBookForm();
@@ -361,7 +362,11 @@ namespace LibrarySystem {
 			
 		}
 		void AddBookClick(object sender, EventArgs e) {
-			
+
+		}
+		private void connectToolStripMenuItem1_Click(object sender, EventArgs e) {
+			serverConnectForm.ParentForm = this;
+			serverConnectForm.ShowDialog();
 		}
 		void ReturnToolStripMenuItemClick(object sender, EventArgs e) {
 			if (booksListView.SelectedItems.Count == 1) {
@@ -370,5 +375,6 @@ namespace LibrarySystem {
 				returnSelectedBook(bookId);
 			}
 		}
+
 	}
 }
