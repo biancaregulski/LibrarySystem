@@ -558,7 +558,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Borrower Information";
+            this.Text = "Library System";
             this.Load += new System.EventHandler(this.MainFormLoad);
             this.groupBoxShow.ResumeLayout(false);
             this.groupBoxShow.PerformLayout();

@@ -5,16 +5,16 @@ using System.Windows.Forms;
 
 namespace LibrarySystem {	
 	public class Borrower {
-		
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
+		public int Id { get; set; }
 		public DateTime Dob { get; set; }
 		public Boolean Restriction { get; set; }
 		public List<Book> CheckedOutBooks { get; set; }
-			
 		private int numReturnedLate;
 		
-		public Borrower(string firstName, string lastName, DateTime dob) {
+		public Borrower(int id, string firstName, string lastName, DateTime dob) {
+			Id = id;
 			FirstName = firstName;
 			LastName = lastName;
 			Dob = dob;

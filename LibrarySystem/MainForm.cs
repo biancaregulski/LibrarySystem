@@ -26,8 +26,8 @@ namespace LibrarySystem {
 			InitializeComponent();
 			borrowers =  new Hashtable();
 			books = new Hashtable();
-			borrowers.Add(++borrowIdCount, new Borrower("Lucy", "Smith", new DateTime(1995, 1, 18)));
-			borrowers.Add(++borrowIdCount, new Borrower("Jack", "Jacobs", new DateTime(1997, 2, 16)));
+			borrowers.Add(++borrowIdCount, new Borrower(borrowIdCount, "Lucy", "Smith", new DateTime(1995, 1, 18)));
+			borrowers.Add(++borrowIdCount, new Borrower(borrowIdCount, "Jack", "Jacobs", new DateTime(1997, 2, 16)));
 			books.Add(++bookIdCount, new Book(bookIdCount, "1984", "George", "Orwell", 1949, true, "842.611.854.C"));
 			books.Add(++bookIdCount, new Book(bookIdCount, "Brave New World", "Aldous", "Huxley", 1932, true, "842.150.656.F"));
 		}
@@ -37,7 +37,7 @@ namespace LibrarySystem {
 		}
 		
 		public int addBorrower(string firstName, string lastName, DateTime dt) {
-			borrowers.Add(++borrowIdCount, new Borrower(firstName, lastName, dt));
+			borrowers.Add(++borrowIdCount, new Borrower(borrowIdCount, firstName, lastName, dt));
 			return borrowIdCount;
 		}
 		

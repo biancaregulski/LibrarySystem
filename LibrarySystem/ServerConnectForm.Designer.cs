@@ -103,6 +103,7 @@
             // 
             this.maskedTextBox5.Location = new System.Drawing.Point(165, 131);
             this.maskedTextBox5.Name = "maskedTextBox5";
+            this.maskedTextBox5.PasswordChar = '•';
             this.maskedTextBox5.Size = new System.Drawing.Size(168, 22);
             this.maskedTextBox5.TabIndex = 5;
             // 
@@ -162,6 +163,7 @@
             this.Controls.Add(this.maskedTextBox3);
             this.Controls.Add(this.maskedTextBox2);
             this.Controls.Add(this.labelNotification);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ServerConnectForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
